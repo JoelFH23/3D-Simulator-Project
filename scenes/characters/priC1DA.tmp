@@ -1,0 +1,44 @@
+[gd_scene load_steps=5 format=3 uid="uid://b6mnghfo6suy4"]
+
+[ext_resource type="Script" path="res://scenes/characters/printer.gd" id="1_tlr22"]
+[ext_resource type="Texture2D" uid="uid://cu6l7x68vugtm" path="res://assets/printer.png" id="2_bqrx1"]
+[ext_resource type="PackedScene" uid="uid://qr7t47bjfbxa" path="res://scenes/menu/window.tscn" id="2_usgvy"]
+[ext_resource type="PackedScene" uid="uid://drqcwrbv27wd4" path="res://scenes/characters/test_player.tscn" id="4_s0ntb"]
+
+[node name="Printer" type="CharacterBody2D"]
+script = ExtResource("1_tlr22")
+
+[node name="sprite_printer" type="Sprite2D" parent="."]
+visible = false
+position = Vector2(118, 85)
+scale = Vector2(0.0974055, 0.105303)
+texture = ExtResource("2_bqrx1")
+
+[node name="button" type="Button" parent="."]
+offset_left = 59.0
+offset_top = 120.0
+offset_right = 137.0
+offset_bottom = 151.0
+text = "Settings"
+
+[node name="start_button" type="Button" parent="."]
+offset_left = 58.0
+offset_top = 158.0
+offset_right = 136.0
+offset_bottom = 189.0
+text = "start"
+
+[node name="Window" parent="." instance=ExtResource("2_usgvy")]
+
+[node name="CharacterBody2D" parent="." instance=ExtResource("4_s0ntb")]
+position = Vector2(60, 10)
+
+[node name="label" type="Label" parent="."]
+offset_left = 46.0
+offset_top = 213.0
+offset_right = 163.0
+offset_bottom = 240.0
+text = "label"
+
+[connection signal="pressed" from="button" to="." method="_on_button_pressed"]
+[connection signal="pressed" from="start_button" to="." method="_on_start_button_pressed"]

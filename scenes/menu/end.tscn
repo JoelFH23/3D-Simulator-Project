@@ -1,0 +1,51 @@
+[gd_scene load_steps=2 format=3 uid="uid://c8esqopklurxm"]
+
+[ext_resource type="Script" path="res://scenes/menu/end.gd" id="1_w1ssm"]
+
+[node name="end_screen" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_w1ssm")
+
+[node name="ColorRect" type="ColorRect" parent="."]
+custom_minimum_size = Vector2(720, 480)
+layout_mode = 0
+offset_right = 1152.0
+offset_bottom = 648.0
+color = Color(0, 0.343496, 0.266185, 1)
+
+[node name="MarginContainer" type="MarginContainer" parent="ColorRect"]
+layout_mode = 0
+offset_right = 1152.0
+offset_bottom = 648.0
+theme_override_constants/margin_left = 40
+theme_override_constants/margin_top = 40
+theme_override_constants/margin_right = 40
+theme_override_constants/margin_bottom = 40
+
+[node name="VBoxContainer" type="VBoxContainer" parent="ColorRect/MarginContainer"]
+layout_mode = 2
+theme_override_constants/separation = 20
+
+[node name="title_label" type="Label" parent="ColorRect/MarginContainer/VBoxContainer"]
+layout_mode = 2
+text = "End Screen"
+
+[node name="RichTextLabel" type="RichTextLabel" parent="ColorRect/MarginContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+text = "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Cras sed felis eget velit aliquet. Nisl tincidunt eget nullam non nisi est. Accumsan lacus vel facilisis volutpat est. Nec ultrices dui sapien eget mi proin sed. Convallis convallis tellus id interdum velit laoreet id donec ultrices. Fermentum et sollicitudin ac orci phasellus egestas tellus rutrum. Et leo duis ut diam quam nulla. Sed adipiscing diam donec adipiscing. Egestas purus viverra accumsan in nisl nisi. Ac feugiat sed lectus vestibulum mattis ullamcorper. Est velit egestas dui id. Tempor orci dapibus ultrices in. A diam sollicitudin tempor id eu nisl nunc. Enim nunc faucibus a pellentesque sit amet porttitor. Turpis massa sed elementum tempus. Fusce id velit ut tortor pretium viverra suspendisse.
+
+Cursus in hac habitasse platea. Et malesuada fames ac turpis egestas maecenas pharetra convallis. Integer eget aliquet nibh praesent tristique magna. Ut ornare lectus sit amet est placerat in egestas. Amet tellus cras adipiscing enim eu turpis. Fermentum leo vel orci porta. Justo donec enim diam vulputate ut. Nisl purus in mollis nunc sed. Id leo in vitae turpis massa sed. Consectetur a erat nam at lectus urna duis convallis convallis. Amet facilisis magna etiam tempor. Eu scelerisque felis imperdiet proin fermentum leo. In nisl nisi scelerisque eu ultrices vitae auctor eu. Maecenas volutpat blandit aliquam etiam erat velit. Sagittis nisl rhoncus mattis rhoncus urna. Velit dignissim sodales ut eu sem integer. Odio ut sem nulla pharetra diam sit amet nisl suscipit. Diam volutpat commodo sed egestas egestas fringilla phasellus.
+
+Amet massa vitae tortor condimentum lacinia quis vel eros. Tellus elementum sagittis vitae et leo duis ut diam quam. Venenatis cras sed felis eget velit aliquet sagittis. Aliquet bibendum enim facilisis gravida neque convallis. Mauris a diam maecenas sed enim ut sem viverra. Ut diam quam nulla porttitor massa. In ante metus dictum at tempor commodo ullamcorper. Sit amet risus nullam eget felis eget nunc. Curabitur vitae nunc sed velit dignissim sodales ut eu. Netus et malesuada fames ac turpis egestas maecenas pharetra convallis. Senectus et netus et malesuada fames ac turpis egestas. Integer quis auctor elit sed vulputate mi."
+
+[node name="Button" type="Button" parent="ColorRect/MarginContainer/VBoxContainer"]
+layout_mode = 2
+text = "Main Menu"
+
+[connection signal="pressed" from="ColorRect/MarginContainer/VBoxContainer/Button" to="." method="_on_button_pressed"]

@@ -1,0 +1,22 @@
+[gd_scene load_steps=3 format=3 uid="uid://bat38noapvntb"]
+
+[ext_resource type="Script" path="res://scenes/levels/inventory_scene.gd" id="1_5rkne"]
+[ext_resource type="Texture2D" uid="uid://0ahfw0uewn4l" path="res://assets/background.jpg" id="2_ixhuq"]
+
+[node name="Node2D" type="Node2D"]
+script = ExtResource("1_5rkne")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(572.25, 330)
+scale = Vector2(0.303468, 0.260181)
+texture = ExtResource("2_ixhuq")
+
+[node name="main_button" type="Button" parent="."]
+custom_minimum_size = Vector2(40, 100)
+offset_left = 1061.0
+offset_top = 324.0
+offset_right = 1101.0
+offset_bottom = 424.0
+text = ">"
+
+[connection signal="pressed" from="main_button" to="." method="_on_main_button_pressed"]

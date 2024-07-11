@@ -1,0 +1,75 @@
+[gd_scene load_steps=4 format=3 uid="uid://bu2vt4chvunwf"]
+
+[ext_resource type="Script" path="res://scenes/levels/start.gd" id="1_b82qw"]
+[ext_resource type="Texture2D" uid="uid://dkei0d0km761a" path="res://assets/main_background.jpg" id="2_05sb0"]
+[ext_resource type="Texture2D" uid="uid://c2ed4xi4rhw3c" path="res://icon.svg" id="2_qhaal"]
+
+[node name="start_menu" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_b82qw")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(570.5, 322.5)
+scale = Vector2(1.66071, 1.67561)
+texture = ExtResource("2_05sb0")
+
+[node name="MarginContainer" type="MarginContainer" parent="Sprite2D"]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -659.0
+offset_top = -400.0
+offset_right = -48.0
+offset_bottom = -9.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 40
+theme_override_constants/margin_top = 40
+theme_override_constants/margin_right = 40
+theme_override_constants/margin_bottom = 40
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Sprite2D/MarginContainer"]
+layout_mode = 2
+size_flags_vertical = 4
+theme_override_constants/separation = 20
+
+[node name="TextureRect" type="TextureRect" parent="Sprite2D/MarginContainer/VBoxContainer"]
+layout_mode = 2
+texture = ExtResource("2_qhaal")
+stretch_mode = 2
+
+[node name="Menu" type="VBoxContainer" parent="Sprite2D/MarginContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="help_button" type="Button" parent="Sprite2D/MarginContainer/VBoxContainer/Menu"]
+layout_mode = 2
+text = "Help"
+flat = true
+alignment = 0
+
+[node name="exit_button" type="Button" parent="Sprite2D/MarginContainer/VBoxContainer/Menu"]
+layout_mode = 2
+text = "Quit"
+flat = true
+alignment = 0
+
+[node name="Button" type="Button" parent="Sprite2D/MarginContainer/VBoxContainer"]
+layout_mode = 2
+text = "Play"
+icon_alignment = 1
+
+[node name="version_label" type="Label" parent="Sprite2D/MarginContainer/VBoxContainer"]
+layout_mode = 2
+text = "v10"
+horizontal_alignment = 2
+
+[connection signal="pressed" from="Sprite2D/MarginContainer/VBoxContainer/Menu/help_button" to="." method="_on_help_button_pressed"]
+[connection signal="pressed" from="Sprite2D/MarginContainer/VBoxContainer/Menu/exit_button" to="." method="_on_exit_button_pressed"]
+[connection signal="pressed" from="Sprite2D/MarginContainer/VBoxContainer/Button" to="." method="_on_button_pressed"]

@@ -1,0 +1,57 @@
+[gd_scene load_steps=2 format=3 uid="uid://clhjp01w3g4su"]
+
+[ext_resource type="Script" path="res://scenes/menu/help.gd" id="1_ch1pn"]
+
+[node name="help_screen" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_ch1pn")
+metadata/_edit_lock_ = true
+
+[node name="ColorRect" type="ColorRect" parent="."]
+layout_mode = 0
+offset_right = 1152.0
+offset_bottom = 648.0
+color = Color(0.121569, 0.419608, 0.45098, 1)
+
+[node name="MarginContainer" type="MarginContainer" parent="ColorRect"]
+layout_mode = 0
+offset_right = 1152.0
+offset_bottom = 648.0
+theme_override_constants/margin_left = 40
+theme_override_constants/margin_top = 40
+theme_override_constants/margin_right = 40
+theme_override_constants/margin_bottom = 40
+
+[node name="VBoxContainer" type="VBoxContainer" parent="ColorRect/MarginContainer"]
+layout_mode = 2
+theme_override_constants/separation = 20
+
+[node name="Label" type="Label" parent="ColorRect/MarginContainer/VBoxContainer"]
+layout_mode = 2
+text = "HELP"
+
+[node name="RichTextLabel" type="RichTextLabel" parent="ColorRect/MarginContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+text = "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Amet consectetur adipiscing elit ut aliquam. Odio euismod lacinia at quis risus sed vulputate. Augue ut lectus arcu bibendum. Tortor id aliquet lectus proin nibh nisl condimentum id. Ut tellus elementum sagittis vitae. A diam sollicitudin tempor id eu nisl nunc. Risus pretium quam vulputate dignissim suspendisse in est. Ipsum dolor sit amet consectetur adipiscing elit. Dictum non consectetur a erat nam at lectus urna. Morbi tristique senectus et netus et. Vitae proin sagittis nisl rhoncus mattis rhoncus urna neque viverra. Nec ullamcorper sit amet risus nullam eget felis. Aenean pharetra magna ac placerat vestibulum lectus mauris ultrices eros. Pellentesque habitant morbi tristique senectus et netus et. Tellus id interdum velit laoreet id donec.
+
+Suspendisse interdum consectetur libero id faucibus nisl. Nisi porta lorem mollis aliquam. Magna eget est lorem ipsum dolor sit amet. Nibh ipsum consequat nisl vel pretium lectus. Egestas integer eget aliquet nibh. Cras ornare arcu dui vivamus arcu felis bibendum ut. Magna ac placerat vestibulum lectus mauris ultrices eros in. Facilisis gravida neque convallis a cras semper auctor neque. Id leo in vitae turpis massa sed. Ut diam quam nulla porttitor massa id neque aliquam vestibulum. Dignissim enim sit amet venenatis urna. Consectetur lorem donec massa sapien faucibus et molestie. Ut faucibus pulvinar elementum integer enim.
+
+Aliquet porttitor lacus luctus accumsan tortor posuere ac ut consequat. Fusce id velit ut tortor pretium viverra suspendisse potenti nullam. Neque vitae tempus quam pellentesque nec nam aliquam. Fusce id velit ut tortor pretium viverra suspendisse potenti. Mi bibendum neque egestas congue quisque egestas diam in. Consectetur adipiscing elit pellentesque habitant morbi tristique. Consequat interdum varius sit amet mattis vulputate enim nulla. Gravida in fermentum et sollicitudin ac orci phasellus. Enim ut tellus elementum sagittis vitae et leo duis ut. Pulvinar pellentesque habitant morbi tristique senectus et. Viverra justo nec ultrices dui sapien eget. Id nibh tortor id aliquet. Eu consequat ac felis donec. At urna condimentum mattis pellentesque id.
+
+Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Amet consectetur adipiscing elit ut aliquam. Odio euismod lacinia at quis risus sed vulputate. Augue ut lectus arcu bibendum. Tortor id aliquet lectus proin nibh nisl condimentum id. Ut tellus elementum sagittis vitae. A diam sollicitudin tempor id eu nisl nunc. Risus pretium quam vulputate dignissim suspendisse in est. Ipsum dolor sit amet consectetur adipiscing elit. Dictum non consectetur a erat nam at lectus urna. Morbi tristique senectus et netus et. Vitae proin sagittis nisl rhoncus mattis rhoncus urna neque viverra. Nec ullamcorper sit amet risus nullam eget felis. Aenean pharetra magna ac placerat vestibulum lectus mauris ultrices eros. Pellentesque habitant morbi tristique senectus et netus et. Tellus id interdum velit laoreet id donec.
+
+Suspendisse interdum consectetur libero id faucibus nisl. Nisi porta lorem mollis aliquam. Magna eget est lorem ipsum dolor sit amet. Nibh ipsum consequat nisl vel pretium lectus. Egestas integer eget aliquet nibh. Cras ornare arcu dui vivamus arcu felis bibendum ut. Magna ac placerat vestibulum lectus mauris ultrices eros in. Facilisis gravida neque convallis a cras semper auctor neque. Id leo in vitae turpis massa sed. Ut diam quam nulla porttitor massa id neque aliquam vestibulum. Dignissim enim sit amet venenatis urna. Consectetur lorem donec massa sapien faucibus et molestie. Ut faucibus pulvinar elementum integer enim.
+
+Aliquet porttitor lacus luctus accumsan tortor posuere ac ut consequat. Fusce id velit ut tortor pretium viverra suspendisse potenti nullam. Neque vitae tempus quam pellentesque nec nam aliquam. Fusce id velit ut tortor pretium viverra suspendisse potenti. Mi bibendum neque egestas congue quisque egestas diam in. Consectetur adipiscing elit pellentesque habitant morbi tristique. Consequat interdum varius sit amet mattis vulputate enim nulla. Gravida in fermentum et sollicitudin ac orci phasellus. Enim ut tellus elementum sagittis vitae et leo duis ut. Pulvinar pellentesque habitant morbi tristique senectus et. Viverra justo nec ultrices dui sapien eget. Id nibh tortor id aliquet. Eu consequat ac felis donec. At urna condimentum mattis pellentesque id."
+
+[node name="Button" type="Button" parent="ColorRect/MarginContainer/VBoxContainer"]
+layout_mode = 2
+text = "Main Menu"
+
+[connection signal="pressed" from="ColorRect/MarginContainer/VBoxContainer/Button" to="." method="_on_button_pressed"]

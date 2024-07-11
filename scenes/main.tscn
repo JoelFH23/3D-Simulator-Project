@@ -1,0 +1,56 @@
+[gd_scene load_steps=4 format=3 uid="uid://boruw2egswc06"]
+
+[ext_resource type="Script" path="res://scenes/main.gd" id="1_hs3mm"]
+[ext_resource type="Texture2D" uid="uid://0ahfw0uewn4l" path="res://assets/background.jpg" id="2_2c0cc"]
+[ext_resource type="PackedScene" uid="uid://b6mnghfo6suy4" path="res://scenes/characters/printer.tscn" id="3_1spsq"]
+
+[node name="Main" type="Node2D"]
+script = ExtResource("1_hs3mm")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(575, 328)
+scale = Vector2(0.295049, 0.254902)
+texture = ExtResource("2_2c0cc")
+
+[node name="Printer" parent="." instance=ExtResource("3_1spsq")]
+position = Vector2(231.999, 157)
+scale = Vector2(1.07106, 0.941185)
+
+[node name="Printer2" parent="." instance=ExtResource("3_1spsq")]
+position = Vector2(334, 157)
+scale = Vector2(1.07106, 0.941185)
+
+[node name="Printer3" parent="." instance=ExtResource("3_1spsq")]
+position = Vector2(436, 157)
+scale = Vector2(1.07106, 0.941185)
+
+[node name="Printer4" parent="." instance=ExtResource("3_1spsq")]
+position = Vector2(535, 157)
+scale = Vector2(1.07106, 0.941185)
+
+[node name="Printer5" parent="." instance=ExtResource("3_1spsq")]
+position = Vector2(632, 157)
+scale = Vector2(1.07106, 0.941185)
+
+[node name="Printer6" parent="." instance=ExtResource("3_1spsq")]
+position = Vector2(728, 157)
+scale = Vector2(1.07106, 0.941185)
+
+[node name="left_button" type="Button" parent="."]
+offset_left = 10.0
+offset_top = 278.0
+offset_right = 58.0
+offset_bottom = 378.0
+theme_override_font_sizes/font_size = 32
+text = "<"
+
+[node name="right_button" type="Button" parent="."]
+offset_left = 1082.0
+offset_top = 278.0
+offset_right = 1130.0
+offset_bottom = 378.0
+theme_override_font_sizes/font_size = 32
+text = ">"
+
+[connection signal="pressed" from="left_button" to="." method="_on_left_button_pressed"]
+[connection signal="pressed" from="right_button" to="." method="_on_right_button_pressed"]
