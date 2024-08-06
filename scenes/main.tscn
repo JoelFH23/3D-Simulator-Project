@@ -1,7 +1,7 @@
 [gd_scene load_steps=4 format=3 uid="uid://boruw2egswc06"]
 
 [ext_resource type="Script" path="res://scenes/main.gd" id="1_hs3mm"]
-[ext_resource type="Texture2D" uid="uid://0ahfw0uewn4l" path="res://assets/background.jpg" id="2_2c0cc"]
+[ext_resource type="Texture2D" uid="uid://b3g32pusanrpc" path="res://assets/background_2.jpg" id="2_w7gvi"]
 [ext_resource type="PackedScene" uid="uid://b6mnghfo6suy4" path="res://scenes/characters/printer.tscn" id="3_1spsq"]
 
 [node name="Main" type="Node2D"]
@@ -10,7 +10,7 @@ script = ExtResource("1_hs3mm")
 [node name="Sprite2D" type="Sprite2D" parent="."]
 position = Vector2(575, 328)
 scale = Vector2(0.295049, 0.254902)
-texture = ExtResource("2_2c0cc")
+texture = ExtResource("2_w7gvi")
 
 [node name="Printer" parent="." instance=ExtResource("3_1spsq")]
 position = Vector2(231.999, 157)

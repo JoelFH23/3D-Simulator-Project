@@ -1,15 +1,20 @@
-[gd_scene load_steps=3 format=3 uid="uid://bat38noapvntb"]
+[gd_scene load_steps=7 format=3 uid="uid://bat38noapvntb"]
 
 [ext_resource type="Script" path="res://scenes/levels/inventory_scene.gd" id="1_5rkne"]
-[ext_resource type="Texture2D" uid="uid://0ahfw0uewn4l" path="res://assets/background.jpg" id="2_ixhuq"]
+[ext_resource type="Texture2D" uid="uid://b3g32pusanrpc" path="res://assets/background_2.jpg" id="3_4b2qb"]
+[ext_resource type="PackedScene" uid="uid://cefgnykhxv055" path="res://scenes/characters/slot.tscn" id="3_xtmit"]
+[ext_resource type="PackedScene" uid="uid://c6wojqibmk1oa" path="res://scenes/characters/hotbar.tscn" id="4_ge35y"]
+[ext_resource type="Texture2D" uid="uid://cftnda7ftkpf" path="res://assets/trash_can.png" id="5_vyn1j"]
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_w6vdf"]
 
 [node name="Node2D" type="Node2D"]
 script = ExtResource("1_5rkne")
 
-[node name="Sprite2D" type="Sprite2D" parent="."]
+[node name="background_image2" type="Sprite2D" parent="."]
 position = Vector2(572.25, 330)
 scale = Vector2(0.303468, 0.260181)
-texture = ExtResource("2_ixhuq")
+texture = ExtResource("3_4b2qb")
 
 [node name="main_button" type="Button" parent="."]
 custom_minimum_size = Vector2(40, 100)
@@ -19,4 +24,123 @@ offset_right = 1101.0
 offset_bottom = 424.0
 text = ">"
 
+[node name="inventory" type="GridContainer" parent="."]
+offset_left = 270.0
+offset_top = 41.0
+offset_right = 924.0
+offset_bottom = 413.0
+columns = 7
+
+[node name="slot" parent="inventory" instance=ExtResource("3_xtmit")]
+layout_mode = 2
+
+[node name="slot2" parent="inventory" instance=ExtResource("3_xtmit")]
+layout_mode = 2
+
+[node name="slot3" parent="inventory" instance=ExtResource("3_xtmit")]
+layout_mode = 2
+
+[node name="slot4" parent="inventory" instance=ExtResource("3_xtmit")]
+layout_mode = 2
+
+[node name="slot5" parent="inventory" instance=ExtResource("3_xtmit")]
+layout_mode = 2
+
+[node name="slot6" parent="inventory" instance=ExtResource("3_xtmit")]
+layout_mode = 2
+
+[node name="slot7" parent="inventory" instance=ExtResource("3_xtmit")]
+layout_mode = 2
+
+[node name="slot8" parent="inventory" instance=ExtResource("3_xtmit")]
+layout_mode = 2
+
+[node name="slot9" parent="inventory" instance=ExtResource("3_xtmit")]
+layout_mode = 2
+
+[node name="slot10" parent="inventory" instance=ExtResource("3_xtmit")]
+layout_mode = 2
+
+[node name="slot11" parent="inventory" instance=ExtResource("3_xtmit")]
+layout_mode = 2
+
+[node name="slot12" parent="inventory" instance=ExtResource("3_xtmit")]
+layout_mode = 2
+
+[node name="slot13" parent="inventory" instance=ExtResource("3_xtmit")]
+layout_mode = 2
+
+[node name="slot14" parent="inventory" instance=ExtResource("3_xtmit")]
+layout_mode = 2
+
+[node name="slot15" parent="inventory" instance=ExtResource("3_xtmit")]
+layout_mode = 2
+
+[node name="slot16" parent="inventory" instance=ExtResource("3_xtmit")]
+layout_mode = 2
+
+[node name="slot17" parent="inventory" instance=ExtResource("3_xtmit")]
+layout_mode = 2
+
+[node name="slot18" parent="inventory" instance=ExtResource("3_xtmit")]
+layout_mode = 2
+
+[node name="slot19" parent="inventory" instance=ExtResource("3_xtmit")]
+layout_mode = 2
+
+[node name="slot20" parent="inventory" instance=ExtResource("3_xtmit")]
+layout_mode = 2
+
+[node name="slot21" parent="inventory" instance=ExtResource("3_xtmit")]
+layout_mode = 2
+
+[node name="slot22" parent="inventory" instance=ExtResource("3_xtmit")]
+layout_mode = 2
+
+[node name="slot23" parent="inventory" instance=ExtResource("3_xtmit")]
+layout_mode = 2
+
+[node name="slot24" parent="inventory" instance=ExtResource("3_xtmit")]
+layout_mode = 2
+
+[node name="slot25" parent="inventory" instance=ExtResource("3_xtmit")]
+layout_mode = 2
+
+[node name="slot26" parent="inventory" instance=ExtResource("3_xtmit")]
+layout_mode = 2
+
+[node name="slot27" parent="inventory" instance=ExtResource("3_xtmit")]
+layout_mode = 2
+
+[node name="slot28" parent="inventory" instance=ExtResource("3_xtmit")]
+layout_mode = 2
+
+[node name="slot29" parent="inventory" instance=ExtResource("3_xtmit")]
+layout_mode = 2
+
+[node name="TextureRect" parent="inventory/slot29" index="0"]
+texture = ExtResource("5_vyn1j")
+
+[node name="hotbar" parent="." instance=ExtResource("4_ge35y")]
+offset_left = 349.0
+offset_top = 528.0
+offset_right = 815.0
+offset_bottom = 627.0
+
+[node name="slot" parent="." instance=ExtResource("3_xtmit")]
+visible = false
+offset_left = 3.0
+offset_top = 551.0
+offset_right = 93.0
+offset_bottom = 641.0
+theme_override_styles/panel = SubResource("StyleBoxTexture_w6vdf")
+
+[node name="Sprite2D" type="Sprite2D" parent="slot"]
+position = Vector2(42, 47)
+scale = Vector2(0.0445937, 0.0496563)
+texture = ExtResource("5_vyn1j")
+
 [connection signal="pressed" from="main_button" to="." method="_on_main_button_pressed"]
+[connection signal="focus_entered" from="inventory" to="." method="_on_inventory_focus_entered"]
+
+[editable path="inventory/slot29"]

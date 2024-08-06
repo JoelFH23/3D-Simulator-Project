@@ -71,8 +71,8 @@ func _on_accept_button_pressed():
 		_close_window()
 		return
 	"""
-	print("Extrusion temp: ", extrusion_temp_line.text)
-	print("Bed temp: ", bed_temp_line.text)
+	print("Extrusion Temp: ", extrusion_temp_line.text)
+	print("Bed Temp: ", bed_temp_line.text)
 	_close_window()
 	_on_timer_timeout()
 
