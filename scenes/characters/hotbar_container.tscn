@@ -1,0 +1,37 @@
+[gd_scene load_steps=5 format=3 uid="uid://cx75r1ol8584p"]
+
+[ext_resource type="PackedScene" uid="uid://cefgnykhxv055" path="res://scenes/characters/slot.tscn" id="1_hybui"]
+[ext_resource type="Script" path="res://scenes/characters/hotbar_container.gd" id="1_m3cqi"]
+[ext_resource type="Texture2D" uid="uid://cftnda7ftkpf" path="res://assets/trash_can.png" id="2_e5ddx"]
+[ext_resource type="PackedScene" uid="uid://c6wojqibmk1oa" path="res://scenes/characters/hotbar.tscn" id="3_0wpam"]
+
+[node name="HotbarContainer" type="HBoxContainer"]
+offset_top = 538.0
+offset_right = 1152.0
+offset_bottom = 648.0
+alignment = 1
+script = ExtResource("1_m3cqi")
+
+[node name="MarginContainer" type="MarginContainer" parent="."]
+custom_minimum_size = Vector2(1152, 0)
+layout_mode = 2
+theme_override_constants/margin_left = 10
+theme_override_constants/margin_top = 10
+theme_override_constants/margin_right = 10
+theme_override_constants/margin_bottom = 10
+
+[node name="delete_item" parent="MarginContainer" instance=ExtResource("1_hybui")]
+layout_mode = 2
+size_flags_horizontal = 0
+
+[node name="id_label" parent="MarginContainer/delete_item" index="0"]
+text = "0"
+
+[node name="TextureRect" parent="MarginContainer/delete_item" index="1"]
+texture = ExtResource("2_e5ddx")
+
+[node name="hotbar" parent="MarginContainer" instance=ExtResource("3_0wpam")]
+layout_mode = 2
+size_flags_horizontal = 4
+
+[editable path="MarginContainer/delete_item"]

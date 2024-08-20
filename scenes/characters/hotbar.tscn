@@ -5,6 +5,7 @@
 [node name="hotbar" type="GridContainer"]
 offset_right = 40.0
 offset_bottom = 40.0
+size_flags_vertical = 4
 columns = 5
 
 [node name="slot" parent="." instance=ExtResource("1_4e0ym")]

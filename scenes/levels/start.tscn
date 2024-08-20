@@ -1,7 +1,7 @@
 [gd_scene load_steps=4 format=3 uid="uid://bu2vt4chvunwf"]
 
 [ext_resource type="Script" path="res://scenes/levels/start.gd" id="1_b82qw"]
-[ext_resource type="Texture2D" uid="uid://dkei0d0km761a" path="res://assets/main_background.jpg" id="2_05sb0"]
+[ext_resource type="Texture2D" uid="uid://0ahfw0uewn4l" path="res://assets/background.jpg" id="2_05sb0"]
 [ext_resource type="Texture2D" uid="uid://c2ed4xi4rhw3c" path="res://icon.svg" id="2_qhaal"]
 
 [node name="start_menu" type="Control"]

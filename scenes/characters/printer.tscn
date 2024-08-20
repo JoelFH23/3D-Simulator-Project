@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" path="res://scenes/characters/printer.gd" id="1_tlr22"]
 [ext_resource type="FontFile" uid="uid://cuquuixff1en" path="res://assets/fonts/Montserrat-Medium.ttf" id="2_5bvs5"]
-[ext_resource type="Texture2D" uid="uid://cu6l7x68vugtm" path="res://assets/printer.png" id="3_3a4qa"]
+[ext_resource type="Texture2D" uid="uid://dwli0k5nuf0if" path="res://assets/bottle.png" id="3_p7soy"]
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_364qi"]
 
@@ -10,7 +10,7 @@
 animations = [{
 "frames": [{
 "duration": 1.0,
-"texture": ExtResource("3_3a4qa")
+"texture": ExtResource("3_p7soy")
 }],
 "loop": true,
 "name": &"walk_animation",

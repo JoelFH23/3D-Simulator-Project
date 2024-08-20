@@ -1,28 +1,18 @@
-[gd_scene load_steps=7 format=3 uid="uid://bat38noapvntb"]
+[gd_scene load_steps=6 format=3 uid="uid://bat38noapvntb"]
 
 [ext_resource type="Script" path="res://scenes/levels/inventory_scene.gd" id="1_5rkne"]
 [ext_resource type="Texture2D" uid="uid://b3g32pusanrpc" path="res://assets/background_2.jpg" id="3_4b2qb"]
 [ext_resource type="PackedScene" uid="uid://cefgnykhxv055" path="res://scenes/characters/slot.tscn" id="3_xtmit"]
-[ext_resource type="PackedScene" uid="uid://c6wojqibmk1oa" path="res://scenes/characters/hotbar.tscn" id="4_ge35y"]
 [ext_resource type="Texture2D" uid="uid://cftnda7ftkpf" path="res://assets/trash_can.png" id="5_vyn1j"]
-
-[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_w6vdf"]
+[ext_resource type="PackedScene" uid="uid://cx75r1ol8584p" path="res://scenes/characters/hotbar_container.tscn" id="6_t2xej"]
 
 [node name="Node2D" type="Node2D"]
 script = ExtResource("1_5rkne")
 
 [node name="background_image2" type="Sprite2D" parent="."]
-position = Vector2(572.25, 330)
-scale = Vector2(0.303468, 0.260181)
+position = Vector2(576, 324.5)
+scale = Vector2(0.291531, 0.248492)
 texture = ExtResource("3_4b2qb")
-
-[node name="main_button" type="Button" parent="."]
-custom_minimum_size = Vector2(40, 100)
-offset_left = 1061.0
-offset_top = 324.0
-offset_right = 1101.0
-offset_bottom = 424.0
-text = ">"
 
 [node name="inventory" type="GridContainer" parent="."]
 offset_left = 270.0
@@ -115,32 +105,47 @@ layout_mode = 2
 [node name="slot28" parent="inventory" instance=ExtResource("3_xtmit")]
 layout_mode = 2
 
-[node name="slot29" parent="inventory" instance=ExtResource("3_xtmit")]
+[node name="BoxContainerLeft" type="VBoxContainer" parent="."]
+visible = false
+custom_minimum_size = Vector2(90, 648)
+offset_right = 90.0
+offset_bottom = 648.0
+alignment = 2
+
+[node name="delete_item" parent="BoxContainerLeft" instance=ExtResource("3_xtmit")]
 layout_mode = 2
 
-[node name="TextureRect" parent="inventory/slot29" index="0"]
+[node name="id_label" parent="BoxContainerLeft/delete_item" index="0"]
+text = "0"
+
+[node name="TextureRect" parent="BoxContainerLeft/delete_item" index="1"]
 texture = ExtResource("5_vyn1j")
 
-[node name="hotbar" parent="." instance=ExtResource("4_ge35y")]
-offset_left = 349.0
-offset_top = 528.0
-offset_right = 815.0
-offset_bottom = 627.0
+[node name="BoxContainerRight" type="VBoxContainer" parent="."]
+offset_left = 1082.0
+offset_right = 1152.0
+offset_bottom = 648.0
+alignment = 1
 
-[node name="slot" parent="." instance=ExtResource("3_xtmit")]
-visible = false
-offset_left = 3.0
-offset_top = 551.0
-offset_right = 93.0
-offset_bottom = 641.0
-theme_override_styles/panel = SubResource("StyleBoxTexture_w6vdf")
+[node name="MarginContainer" type="MarginContainer" parent="BoxContainerRight"]
+custom_minimum_size = Vector2(20, 648)
+layout_mode = 2
+theme_override_constants/margin_left = 20
+theme_override_constants/margin_top = 20
+theme_override_constants/margin_right = 20
+theme_override_constants/margin_bottom = 20
 
-[node name="Sprite2D" type="Sprite2D" parent="slot"]
-position = Vector2(42, 47)
-scale = Vector2(0.0445937, 0.0496563)
-texture = ExtResource("5_vyn1j")
+[node name="main_button" type="Button" parent="BoxContainerRight/MarginContainer"]
+custom_minimum_size = Vector2(30, 90)
+layout_mode = 2
+size_flags_vertical = 4
+text = ">"
 
-[connection signal="pressed" from="main_button" to="." method="_on_main_button_pressed"]
+[node name="HotbarContainer" parent="." instance=ExtResource("6_t2xej")]
+
 [connection signal="focus_entered" from="inventory" to="." method="_on_inventory_focus_entered"]
+[connection signal="pressed" from="BoxContainerRight/MarginContainer/main_button" to="." method="_on_main_button_pressed"]
 
-[editable path="inventory/slot29"]
+[editable path="BoxContainerLeft/delete_item"]
+[editable path="HotbarContainer"]
+[editable path="HotbarContainer/MarginContainer/delete_item"]

@@ -10,6 +10,8 @@ var timer := Timer.new()
 var stylebox_flat := StyleBoxFlat.new()
 const MAX_RANDOM_SEGS: int = 5
 
+var thread: Thread
+
 func _close_window():
 	window.hide()
 	
@@ -49,7 +51,13 @@ func _reset_values():
 	timer.stop()
 	label.text = "0"
 
+func _on_container_button_pressed():
+	_open_window()
+
 func _on_timer_timeout():
+	print("running")
+	player.play("walk_animation")
+	"""
 	if timer.paused:
 		timer.paused = false
 		player.play("walk_animation")
@@ -61,9 +69,7 @@ func _on_timer_timeout():
 	label.text = str(RANDOM_NUM)
 	timer.wait_time = RANDOM_NUM
 	timer.start()
-
-func _on_container_button_pressed():
-	_open_window()
+	"""
 
 func _on_accept_button_pressed():
 	"""
@@ -74,7 +80,10 @@ func _on_accept_button_pressed():
 	print("Extrusion Temp: ", extrusion_temp_line.text)
 	print("Bed Temp: ", bed_temp_line.text)
 	_close_window()
-	_on_timer_timeout()
+	
+	thread = Thread.new()
+	thread.start(_on_timer_timeout.bind())
+	#_on_timer_timeout()
 
 func _on_pause_unpause():
 	if timer.paused:

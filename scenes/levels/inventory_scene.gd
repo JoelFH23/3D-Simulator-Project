@@ -1,35 +1,42 @@
 extends Node2D
 
-#@onready var inventory = $inventory
+@onready var inventory = $inventory
+const bottle_sprite = preload("res://assets/filament4.png")
 
-# Called when the node enters the scene tree for the first time.
 func _ready():
-	var new_texture = TextureRect.new()
-	new_texture.texture = load("res://assets/orange.png")
-	new_texture.expand_mode = 1 # ignore size
-	new_texture.size = Vector2(40,40)
-	new_texture.stretch_mode = 0
-	
-	"""
-	var sprites = [
-		load("res://assets/coconut.png"),
-		load("res://assets/banana.png"),
-		load("res://assets/cherry.png"),
-		load("res://assets/orange.png")
-	]
-	# fill inventory (only for test)
-	for item in inventory.get_children():
-		var rng = RandomNumberGenerator.new()
-		if rng.randi_range(0, 1):
+	if Autoload.inventory_list.size():
+		for idx in Autoload.inventory_list.size():
+			if Autoload.inventory_list[idx].sprite:
+				var texture = Autoload.inventory_list[idx].sprite
+				var quantity = Autoload.inventory_list[idx].quantity
+				inventory.get_child(idx).get_children()[1].texture = texture
+				inventory.get_child(idx).get_children()[2].text = quantity
+			inventory.get_child(idx).get_children()[0].text = str(idx)
+		return
+		
+	for idx in inventory.get_child_count():
+		inventory.get_child(idx).get_children()[0].text = str(idx)
+		if idx > 8:
+			Autoload.inventory_list.append({
+				"idx": idx,
+				"sprite": false,
+			})
 			continue
 		
-		item.get_children()[0].texture = sprites.pick_random()
-		item.get_children()[1].text = str(rng.randi_range(0, 100))
-	"""
-
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(_delta):
-	pass
+		var rng = RandomNumberGenerator.new()
+		var random_text: String = str(rng.randi_range(10, 100))
+		
+		inventory.get_child(idx).get_children()[1].texture = bottle_sprite
+		inventory.get_child(idx).get_children()[2].text = random_text
+		
+		Autoload.inventory_list.append(
+			{
+				"idx": idx,
+				"sprite": bottle_sprite,
+				"quantity": random_text
+			}
+		)
+	Autoload.save_to_file()
 
 func _on_main_button_pressed():
-	get_tree().change_scene_to_file("res://scenes/main.tscn")
+	get_tree().change_scene_to_file("res://scenes/levels/main.tscn")
