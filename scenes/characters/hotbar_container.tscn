@@ -22,7 +22,6 @@ theme_override_constants/margin_bottom = 10
 
 [node name="delete_item" parent="MarginContainer" instance=ExtResource("1_hybui")]
 layout_mode = 2
-size_flags_horizontal = 0
 
 [node name="id_label" parent="MarginContainer/delete_item" index="0"]
 text = "0"

@@ -10,7 +10,10 @@ var timer := Timer.new()
 var stylebox_flat := StyleBoxFlat.new()
 const MAX_RANDOM_SEGS: int = 5
 
-var thread: Thread
+var current_time: int = 0
+
+var is_running: bool = false
+signal update_label_text(text)
 
 func _close_window():
 	window.hide()
@@ -23,7 +26,6 @@ func _open_window():
 		timer.paused = true
 	window.show()
 
-# Called when the node enters the scene tree for the first time.
 func _ready():
 	stylebox_flat.bg_color = Color(0,0,0)
 	stylebox_flat.content_margin_top = 4
@@ -36,15 +38,15 @@ func _ready():
 	bed_temp_line.add_theme_stylebox_override("normal",stylebox_flat)
 	extrusion_temp_line.add_theme_stylebox_override("normal",stylebox_flat)
 	
-	#pause_button.visible = false
 	timer.one_shot = true
 	timer.timeout.connect(_reset_values)
 	add_child(timer)
 	_close_window()
+	connect("update_label_text", _on_update_label_text)
 
-# Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(_delta):
-	label.text = str(int(timer.time_left))
+	#label.text = str(current_time)
+	pass
 
 func _reset_values():
 	player.stop()
@@ -54,10 +56,31 @@ func _reset_values():
 func _on_container_button_pressed():
 	_open_window()
 
-func _on_timer_timeout():
-	print("running")
-	player.play("walk_animation")
+func _emit_update_label_text(text: String):
+	emit_signal("update_label_text", text)
+
+func _on_update_label_text(_text: String):
+	#label.text = str(text)
+	pass
+
+func _on_timeout():
+	var idx: int = 0
+	while idx != 25:
+		print("waiting... ", idx)
+		#print(Time.get_datetime_string_from_system()," Done!")
+		#call_deferred("_emit_update_label_text", str(idx))
+		#current_time = idx
+		idx += 1
+		OS.delay_msec(250)
+		print("done!")
+	print("finished!")
+	#call_deferred("_emit_update_label_text", "0")
+	is_running = false
 	"""
+	while true:
+		print("I'm a thread")
+		OS.delay_msec(500)
+		print("Done!")
 	if timer.paused:
 		timer.paused = false
 		player.play("walk_animation")
@@ -77,13 +100,28 @@ func _on_accept_button_pressed():
 		_close_window()
 		return
 	"""
-	print("Extrusion Temp: ", extrusion_temp_line.text)
-	print("Bed Temp: ", bed_temp_line.text)
 	_close_window()
 	
-	thread = Thread.new()
-	thread.start(_on_timer_timeout.bind())
-	#_on_timer_timeout()
+	print("Extrusion Temp: ", extrusion_temp_line.text)
+	print("Bed Temp: ", bed_temp_line.text)
+	
+	var task_id = Autoload.workerThreadPool.add_task(_on_timeout)
+	print("running: ", task_id)
+	
+	"""
+	var thread = Thread.new()
+	print("Thread is alive: ", thread.is_alive())
+	thread.start(Autoload.on_press_button)
+	if is_running:
+		return
+	
+	return
+	is_running = true
+	"""
+	#var thread = Thread.new()
+	#print("Thread_id: ", thread.is_alive())
+	#print("thread: ", thread.is_alive())
+	#thread.start(Autoload.on_press_button)
 
 func _on_pause_unpause():
 	if timer.paused:
@@ -98,5 +136,4 @@ func _on_window_close_requested():
 	_on_pause_unpause()
 
 func _on_close_button_pressed():
-	print("close")
 	_on_pause_unpause()

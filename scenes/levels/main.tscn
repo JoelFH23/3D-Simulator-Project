@@ -13,30 +13,6 @@ position = Vector2(575, 328)
 scale = Vector2(0.295049, 0.254902)
 texture = ExtResource("2_w7gvi")
 
-[node name="Printer" parent="." instance=ExtResource("3_1spsq")]
-position = Vector2(231.999, 157)
-scale = Vector2(1.07106, 0.941185)
-
-[node name="Printer2" parent="." instance=ExtResource("3_1spsq")]
-position = Vector2(334, 157)
-scale = Vector2(1.07106, 0.941185)
-
-[node name="Printer3" parent="." instance=ExtResource("3_1spsq")]
-position = Vector2(436, 157)
-scale = Vector2(1.07106, 0.941185)
-
-[node name="Printer4" parent="." instance=ExtResource("3_1spsq")]
-position = Vector2(535, 157)
-scale = Vector2(1.07106, 0.941185)
-
-[node name="Printer5" parent="." instance=ExtResource("3_1spsq")]
-position = Vector2(632, 157)
-scale = Vector2(1.07106, 0.941185)
-
-[node name="Printer6" parent="." instance=ExtResource("3_1spsq")]
-position = Vector2(728, 157)
-scale = Vector2(1.07106, 0.941185)
-
 [node name="HotbarContainer" parent="." instance=ExtResource("5_b2vkk")]
 
 [node name="delete_item" parent="HotbarContainer/MarginContainer" index="0"]
@@ -83,16 +59,39 @@ layout_mode = 2
 size_flags_vertical = 4
 text = ">"
 
-[node name="Button" type="Button" parent="."]
-offset_left = 524.0
-offset_top = 408.0
-offset_right = 622.0
-offset_bottom = 439.0
-text = "Run Thread"
+[node name="HBoxPrinterContainer" type="HBoxContainer" parent="."]
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="PrinterMarginContainer" type="MarginContainer" parent="HBoxPrinterContainer"]
+layout_mode = 2
+
+[node name="Printer" parent="HBoxPrinterContainer/PrinterMarginContainer" instance=ExtResource("3_1spsq")]
+position = Vector2(231.999, 157)
+scale = Vector2(1.07106, 0.941185)
+
+[node name="Printer2" parent="HBoxPrinterContainer/PrinterMarginContainer" instance=ExtResource("3_1spsq")]
+position = Vector2(334, 157)
+scale = Vector2(1.07106, 0.941185)
+
+[node name="Printer3" parent="HBoxPrinterContainer/PrinterMarginContainer" instance=ExtResource("3_1spsq")]
+position = Vector2(436, 157)
+scale = Vector2(1.07106, 0.941185)
+
+[node name="Printer4" parent="HBoxPrinterContainer/PrinterMarginContainer" instance=ExtResource("3_1spsq")]
+position = Vector2(535, 157)
+scale = Vector2(1.07106, 0.941185)
+
+[node name="Printer5" parent="HBoxPrinterContainer/PrinterMarginContainer" instance=ExtResource("3_1spsq")]
+position = Vector2(636, 157)
+scale = Vector2(1.07106, 0.941185)
+
+[node name="Printer6" parent="HBoxPrinterContainer/PrinterMarginContainer" instance=ExtResource("3_1spsq")]
+position = Vector2(736, 157)
+scale = Vector2(1.07106, 0.941185)
 
 [connection signal="pressed" from="VBoxContainer/MarginContainer/left_button" to="." method="_on_left_button_pressed"]
 [connection signal="pressed" from="VBoxContainer2/MarginContainer/right_button" to="." method="_on_right_button_pressed"]
-[connection signal="pressed" from="Button" to="." method="_on_run_thread_pressed"]
 
 [editable path="HotbarContainer"]
 [editable path="HotbarContainer/MarginContainer/delete_item"]
