@@ -1,15 +1,15 @@
 extends Node2D
 
 @onready var inventory = $inventory
-const filament_sprite = preload("res://assets/filament4.png")
+#const filament_sprite = preload("res://assets/filament4.png")
 
-func load_file():
-	var json_as_text = FileAccess.get_file_as_string("res://file_data.json")
-	var json_as_dict = JSON.parse_string(json_as_text)
-	for item in json_as_dict.printers:
-		pass
-
+const filament_sprite = [
+	preload("res://assets/filament4.png"),
+	preload("res://assets/filament.png"),
+	preload("res://assets/filament3.png")
+]
 func _ready():
+	# when the inventory is not empty draw the filaments
 	if not Autoload.game_data.inventory.is_empty():
 		for idx in Autoload.game_data.inventory.size():
 			inventory.get_child(idx).get_children()[0].text = str(idx)
@@ -21,19 +21,21 @@ func _ready():
 			inventory.get_child(idx).get_children()[0].text = str(idx)
 		return
 	
+	# Create 10 filaments when the inventory list is empty
 	var inventory_list: Array = []
 	for idx in inventory.get_child_count():
 		inventory.get_child(idx).get_children()[0].text = str(idx)
 		if idx <= 10:
+			var random_sprite: CompressedTexture2D = filament_sprite.pick_random()
 			var rng = RandomNumberGenerator.new()
 			var random_text: String = str(rng.randi_range(10, 100))
-			inventory.get_child(idx).get_children()[1].texture = filament_sprite
+			inventory.get_child(idx).get_children()[1].texture = random_sprite
 			inventory.get_child(idx).get_children()[2].text = random_text
 			inventory_list.append(
 				{
 					"idx": idx,
-					"sprite": filament_sprite.resource_path,
-					"quantity": random_text
+					"sprite": random_sprite.resource_path,
+					"quantity": 100
 				}
 			)
 			continue

@@ -1,11 +1,20 @@
-[gd_scene load_steps=19 format=3 uid="uid://b6mnghfo6suy4"]
+[gd_scene load_steps=25 format=3 uid="uid://b6mnghfo6suy4"]
 
 [ext_resource type="Script" path="res://scenes/characters/printer.gd" id="1_tlr22"]
 [ext_resource type="FontFile" uid="uid://cuquuixff1en" path="res://assets/fonts/Montserrat-Medium.ttf" id="2_5bvs5"]
+[ext_resource type="Texture2D" uid="uid://yjjqyu7bd830" path="res://assets/printer_img.png" id="2_melbu"]
 [ext_resource type="Texture2D" uid="uid://4ii1l8pl47l3" path="res://assets/zelda.png" id="3_y84ix"]
 [ext_resource type="PackedScene" uid="uid://cefgnykhxv055" path="res://scenes/characters/slot.tscn" id="4_ddbc7"]
 
-[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_364qi"]
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_n1kxr"]
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_sot1m"]
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_bsqd0"]
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_r10nk"]
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_xhvxj"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_vl48s"]
 atlas = ExtResource("3_y84ix")
@@ -51,6 +60,14 @@ region = Rect2(1080, 910, 120, 130)
 animations = [{
 "frames": [{
 "duration": 1.0,
+"texture": ExtResource("2_melbu")
+}],
+"loop": true,
+"name": &"idle_animation",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
 "texture": SubResource("AtlasTexture_vl48s")
 }, {
 "duration": 1.0,
@@ -85,6 +102,9 @@ animations = [{
 "speed": 8.0
 }]
 
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_jsuwp"]
+bg_color = Color(0.23, 0.23, 0.23, 0.37)
+
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_cw2da"]
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_5bocx"]
@@ -94,50 +114,61 @@ position = Vector2(-40, 154)
 scale = Vector2(3.5, 3.5)
 script = ExtResource("1_tlr22")
 
+[node name="slot" parent="." instance=ExtResource("4_ddbc7")]
+offset_left = 19.7143
+offset_top = -40.0
+offset_right = 109.714
+offset_bottom = 50.0
+scale = Vector2(0.717143, 0.694286)
+
 [node name="container_button" type="Button" parent="."]
-offset_left = 14.0
-offset_top = 7.0
-offset_right = 84.0
-offset_bottom = 87.0
-theme_override_styles/focus = SubResource("StyleBoxEmpty_364qi")
+offset_left = 16.8571
+offset_top = 26.5714
+offset_right = 86.8571
+offset_bottom = 106.571
+theme_override_styles/normal = SubResource("StyleBoxTexture_n1kxr")
+theme_override_styles/hover = SubResource("StyleBoxTexture_sot1m")
+theme_override_styles/pressed = SubResource("StyleBoxTexture_bsqd0")
+theme_override_styles/disabled = SubResource("StyleBoxTexture_r10nk")
+theme_override_styles/focus = SubResource("StyleBoxTexture_xhvxj")
+toggle_mode = true
 metadata/_edit_use_anchors_ = true
 
 [node name="time_label" type="Label" parent="container_button"]
 texture_filter = 1
 layout_mode = 2
-anchor_left = -0.0367347
-anchor_top = -0.314286
-anchor_right = -0.0367347
-anchor_bottom = -0.314286
+anchor_left = -0.0428571
+anchor_top = -0.4
+anchor_right = -0.0428571
+anchor_bottom = -0.4
 offset_left = 4.0
 offset_top = 113.0
 offset_right = 74.0
 offset_bottom = 136.0
-text = "0"
+theme_override_font_sizes/font_size = 10
 horizontal_alignment = 1
 metadata/_edit_use_anchors_ = true
 
 [node name="CharacterBody2D" type="CharacterBody2D" parent="container_button"]
+visible = false
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="container_button/CharacterBody2D"]
-position = Vector2(34.5714, 40.1429)
-scale = Vector2(0.2, 0.2)
+position = Vector2(36, 33.1429)
+scale = Vector2(0.193571, 0.187321)
 sprite_frames = SubResource("SpriteFrames_r0yt8")
-animation = &"walk_animation"
-frame = 5
-frame_progress = 0.499646
+animation = &"idle_animation"
 
-[node name="slot" parent="." instance=ExtResource("4_ddbc7")]
-custom_minimum_size = Vector2(10, 10)
-offset_left = 31.1429
-offset_top = -41.7143
-offset_right = 121.143
-offset_bottom = 48.2857
-scale = Vector2(0.5, 0.5)
+[node name="figure_slot" parent="." instance=ExtResource("4_ddbc7")]
+offset_left = 33.4286
+offset_top = 126.857
+offset_right = 123.429
+offset_bottom = 216.857
+scale = Vector2(0.461226, 0.375219)
+theme_override_styles/panel = SubResource("StyleBoxFlat_jsuwp")
 
 [node name="Window" type="Window" parent="."]
 initial_position = 1
-size = Vector2i(400, 180)
+size = Vector2i(400, 260)
 visible = false
 always_on_top = true
 
@@ -187,6 +218,9 @@ layout_mode = 2
 theme_override_fonts/font = ExtResource("2_5bvs5")
 theme_override_styles/focus = SubResource("StyleBoxEmpty_5bocx")
 placeholder_text = "360°"
+
+[node name="slot" parent="Window/MarginContainer/VBoxContainer" instance=ExtResource("4_ddbc7")]
+layout_mode = 2
 
 [node name="HBoxContainer3" type="HBoxContainer" parent="Window/MarginContainer/VBoxContainer"]
 layout_mode = 2

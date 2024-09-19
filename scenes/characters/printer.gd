@@ -5,15 +5,15 @@ extends CharacterBody2D
 @onready var label = $container_button/time_label
 @onready var extrusion_temp_line = $Window/MarginContainer/VBoxContainer/HBoxContainer/extrusion_temp_line_edit
 @onready var bed_temp_line = $Window/MarginContainer/VBoxContainer/HBoxContainer2/bed_temp_line_edit
+@onready var slot = $slot
+@onready var printer_id = $slot/id_label
 
 var timer := Timer.new()
-var stylebox_flat := StyleBoxFlat.new()
-const MAX_RANDOM_SEGS: int = 5
-
 var current_time: int = 0
-
 var is_running: bool = false
 signal update_label_text(text)
+const MAX_RANDOM_SEGS: int = 5
+var stylebox_flat := StyleBoxFlat.new()
 
 func _close_window():
 	window.hide()
@@ -45,8 +45,10 @@ func _ready():
 	connect("update_label_text", _on_update_label_text)
 
 func _process(_delta):
-	#label.text = str(current_time)
-	pass
+	if Autoload.errors_list.size():
+		print("ERROR: ", Autoload.errors_list.find(int(printer_id.text)))
+	#if Autoload.game_data.printer[int(slot.id_label.text)].sprite:
+		#slot.quantity_label.text = str(Autoload.game_data.printer[int(slot.id_label.text)].quantity)
 
 func _reset_values():
 	player.stop()
@@ -67,61 +69,40 @@ func _on_timeout():
 	var idx: int = 0
 	while idx != 25:
 		print("waiting... ", idx)
-		#print(Time.get_datetime_string_from_system()," Done!")
-		#call_deferred("_emit_update_label_text", str(idx))
-		#current_time = idx
 		idx += 1
 		OS.delay_msec(250)
 		print("done!")
 	print("finished!")
 	#call_deferred("_emit_update_label_text", "0")
 	is_running = false
-	"""
-	while true:
-		print("I'm a thread")
-		OS.delay_msec(500)
-		print("Done!")
-	if timer.paused:
-		timer.paused = false
-		player.play("walk_animation")
-		return
-	
-	player.play("walk_animation")
-	var rng = RandomNumberGenerator.new()
-	var RANDOM_NUM = rng.randi_range(1,MAX_RANDOM_SEGS)
-	label.text = str(RANDOM_NUM)
-	timer.wait_time = RANDOM_NUM
-	timer.start()
-	"""
 
 func _on_accept_button_pressed():
 	"""
 	if int(extrusion_temp_line.text) <= 0 or int(bed_temp_line.text) <= 0:
+		label.text = "FAILED!"
 		_close_window()
 		return
 	"""
+	
+	if int(slot.quantity_label.text) <= 0:
+		label.text = "FAILED!"
+		return
 	_close_window()
 	
 	print("Extrusion Temp: ", extrusion_temp_line.text)
 	print("Bed Temp: ", bed_temp_line.text)
+	label.text = ""
 	
-	var task_id = Autoload.workerThreadPool.add_task(_on_timeout)
-	print("running: ", task_id)
+	for idx in Autoload.printer_info_list.size():
+		if int(Autoload.printer_info_list[idx].id) == int(slot.id_label.text):
+			Autoload.printer_info_list.remove_at(idx)
 	
-	"""
-	var thread = Thread.new()
-	print("Thread is alive: ", thread.is_alive())
-	thread.start(Autoload.on_press_button)
-	if is_running:
-		return
-	
-	return
-	is_running = true
-	"""
-	#var thread = Thread.new()
-	#print("Thread_id: ", thread.is_alive())
-	#print("thread: ", thread.is_alive())
-	#thread.start(Autoload.on_press_button)
+	Autoload.start_worker(int(slot.id_label.text))
+	Autoload.printer_info_list.append({
+		"id": int(slot.id_label.text),
+		"ext_temp": int(extrusion_temp_line.text),
+		"bed_temp": int(bed_temp_line.text)
+	})
 
 func _on_pause_unpause():
 	if timer.paused:
@@ -137,3 +118,7 @@ func _on_window_close_requested():
 
 func _on_close_button_pressed():
 	_on_pause_unpause()
+
+
+func _on_texture_button_pressed() -> void:
+	print("button pressed!")

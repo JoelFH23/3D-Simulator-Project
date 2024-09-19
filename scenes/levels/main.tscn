@@ -1,14 +1,17 @@
-[gd_scene load_steps=5 format=3 uid="uid://boruw2egswc06"]
+[gd_scene load_steps=7 format=3 uid="uid://boruw2egswc06"]
 
 [ext_resource type="Script" path="res://scenes/levels/main.gd" id="1_hs3mm"]
 [ext_resource type="Texture2D" uid="uid://b3g32pusanrpc" path="res://assets/background_2.jpg" id="2_w7gvi"]
 [ext_resource type="PackedScene" uid="uid://b6mnghfo6suy4" path="res://scenes/characters/printer.tscn" id="3_1spsq"]
+[ext_resource type="PackedScene" uid="uid://drmmnoqe838l4" path="res://scenes/characters/button.tscn" id="4_cty3t"]
 [ext_resource type="PackedScene" uid="uid://cx75r1ol8584p" path="res://scenes/characters/hotbar_container.tscn" id="5_b2vkk"]
+[ext_resource type="PackedScene" uid="uid://dvya5y746pbt5" path="res://scenes/characters/printer_container.tscn" id="5_djcek"]
 
 [node name="Main" type="Node2D"]
 script = ExtResource("1_hs3mm")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
+visible = false
 position = Vector2(575, 328)
 scale = Vector2(0.295049, 0.254902)
 texture = ExtResource("2_w7gvi")
@@ -18,13 +21,13 @@ texture = ExtResource("2_w7gvi")
 [node name="delete_item" parent="HotbarContainer/MarginContainer" index="0"]
 visible = false
 
-[node name="VBoxContainer" type="VBoxContainer" parent="."]
+[node name="LeftButtonContainer" type="VBoxContainer" parent="."]
 custom_minimum_size = Vector2(0, 648)
 offset_right = 40.0
 offset_bottom = 40.0
 alignment = 1
 
-[node name="MarginContainer" type="MarginContainer" parent="VBoxContainer"]
+[node name="MarginContainer" type="MarginContainer" parent="LeftButtonContainer"]
 custom_minimum_size = Vector2(0, 648)
 layout_mode = 2
 theme_override_constants/margin_left = 20
@@ -32,20 +35,18 @@ theme_override_constants/margin_top = 20
 theme_override_constants/margin_right = 20
 theme_override_constants/margin_bottom = 20
 
-[node name="left_button" type="Button" parent="VBoxContainer/MarginContainer"]
-custom_minimum_size = Vector2(30, 90)
+[node name="left_button" parent="LeftButtonContainer/MarginContainer" instance=ExtResource("4_cty3t")]
 layout_mode = 2
-size_flags_vertical = 4
 text = "<"
 
-[node name="VBoxContainer2" type="VBoxContainer" parent="."]
+[node name="RightButtonContainer" type="VBoxContainer" parent="."]
 custom_minimum_size = Vector2(0, 648)
 offset_left = 1086.0
 offset_right = 1152.0
 offset_bottom = 648.0
 alignment = 1
 
-[node name="MarginContainer" type="MarginContainer" parent="VBoxContainer2"]
+[node name="MarginContainer" type="MarginContainer" parent="RightButtonContainer"]
 custom_minimum_size = Vector2(0, 648)
 layout_mode = 2
 theme_override_constants/margin_left = 20
@@ -53,13 +54,15 @@ theme_override_constants/margin_top = 20
 theme_override_constants/margin_right = 20
 theme_override_constants/margin_bottom = 20
 
-[node name="right_button" type="Button" parent="VBoxContainer2/MarginContainer"]
-custom_minimum_size = Vector2(30, 90)
+[node name="right_button" parent="RightButtonContainer/MarginContainer" instance=ExtResource("4_cty3t")]
 layout_mode = 2
-size_flags_vertical = 4
 text = ">"
 
+[node name="printers" parent="." instance=ExtResource("5_djcek")]
+position = Vector2(227, 0)
+
 [node name="HBoxPrinterContainer" type="HBoxContainer" parent="."]
+visible = false
 offset_right = 40.0
 offset_bottom = 40.0
 
@@ -90,8 +93,8 @@ scale = Vector2(1.07106, 0.941185)
 position = Vector2(736, 157)
 scale = Vector2(1.07106, 0.941185)
 
-[connection signal="pressed" from="VBoxContainer/MarginContainer/left_button" to="." method="_on_left_button_pressed"]
-[connection signal="pressed" from="VBoxContainer2/MarginContainer/right_button" to="." method="_on_right_button_pressed"]
+[connection signal="pressed" from="LeftButtonContainer/MarginContainer/left_button" to="." method="_on_left_button_pressed"]
+[connection signal="pressed" from="RightButtonContainer/MarginContainer/right_button" to="." method="_on_right_button_pressed"]
 
 [editable path="HotbarContainer"]
 [editable path="HotbarContainer/MarginContainer/delete_item"]

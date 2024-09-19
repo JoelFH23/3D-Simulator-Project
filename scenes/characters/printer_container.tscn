@@ -1,0 +1,32 @@
+[gd_scene load_steps=3 format=3 uid="uid://dvya5y746pbt5"]
+
+[ext_resource type="Script" path="res://scenes/characters/printer_container.gd" id="1_8hvkv"]
+[ext_resource type="PackedScene" uid="uid://b6mnghfo6suy4" path="res://scenes/characters/printer.tscn" id="1_e0p4a"]
+
+[node name="Node2D" type="Node2D"]
+script = ExtResource("1_8hvkv")
+
+[node name="PrinterContainer" type="MarginContainer" parent="."]
+
+[node name="Printer" parent="PrinterContainer" instance=ExtResource("1_e0p4a")]
+position = Vector2(16, 78)
+scale = Vector2(1.58, 1.62)
+
+[node name="Printer2" parent="PrinterContainer" instance=ExtResource("1_e0p4a")]
+position = Vector2(147, 78)
+scale = Vector2(1.58, 1.62)
+
+[node name="Printer3" parent="PrinterContainer" instance=ExtResource("1_e0p4a")]
+position = Vector2(280, 78)
+scale = Vector2(1.58, 1.62)
+
+[node name="Printer4" parent="PrinterContainer" instance=ExtResource("1_e0p4a")]
+position = Vector2(409, 78)
+scale = Vector2(1.58, 1.62)
+
+[node name="Printer5" parent="PrinterContainer" instance=ExtResource("1_e0p4a")]
+position = Vector2(541, 78)
+scale = Vector2(1.58, 1.62)
+
+[editable path="PrinterContainer/Printer"]
+[editable path="PrinterContainer/Printer/slot"]

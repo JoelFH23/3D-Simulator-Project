@@ -1,9 +1,11 @@
-[gd_scene load_steps=5 format=3 uid="uid://cx75r1ol8584p"]
+[gd_scene load_steps=6 format=3 uid="uid://cx75r1ol8584p"]
 
 [ext_resource type="PackedScene" uid="uid://cefgnykhxv055" path="res://scenes/characters/slot.tscn" id="1_hybui"]
 [ext_resource type="Script" path="res://scenes/characters/hotbar_container.gd" id="1_m3cqi"]
 [ext_resource type="Texture2D" uid="uid://cftnda7ftkpf" path="res://assets/trash_can.png" id="2_e5ddx"]
 [ext_resource type="PackedScene" uid="uid://c6wojqibmk1oa" path="res://scenes/characters/hotbar.tscn" id="3_0wpam"]
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_t8upe"]
 
 [node name="HotbarContainer" type="HBoxContainer"]
 offset_top = 538.0
@@ -22,6 +24,7 @@ theme_override_constants/margin_bottom = 10
 
 [node name="delete_item" parent="MarginContainer" instance=ExtResource("1_hybui")]
 layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxTexture_t8upe")
 
 [node name="id_label" parent="MarginContainer/delete_item" index="0"]
 text = "0"

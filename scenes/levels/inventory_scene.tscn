@@ -1,8 +1,9 @@
-[gd_scene load_steps=6 format=3 uid="uid://bat38noapvntb"]
+[gd_scene load_steps=7 format=3 uid="uid://bat38noapvntb"]
 
 [ext_resource type="Script" path="res://scenes/levels/inventory_scene.gd" id="1_5rkne"]
 [ext_resource type="Texture2D" uid="uid://b3g32pusanrpc" path="res://assets/background_2.jpg" id="3_4b2qb"]
 [ext_resource type="PackedScene" uid="uid://cefgnykhxv055" path="res://scenes/characters/slot.tscn" id="3_xtmit"]
+[ext_resource type="PackedScene" uid="uid://drmmnoqe838l4" path="res://scenes/characters/button.tscn" id="5_tpsrb"]
 [ext_resource type="Texture2D" uid="uid://cftnda7ftkpf" path="res://assets/trash_can.png" id="5_vyn1j"]
 [ext_resource type="PackedScene" uid="uid://cx75r1ol8584p" path="res://scenes/characters/hotbar_container.tscn" id="6_t2xej"]
 
@@ -10,6 +11,7 @@
 script = ExtResource("1_5rkne")
 
 [node name="background_image2" type="Sprite2D" parent="."]
+visible = false
 position = Vector2(576, 324.5)
 scale = Vector2(0.291531, 0.248492)
 texture = ExtResource("3_4b2qb")
@@ -135,10 +137,8 @@ theme_override_constants/margin_top = 20
 theme_override_constants/margin_right = 20
 theme_override_constants/margin_bottom = 20
 
-[node name="main_button" type="Button" parent="BoxContainerRight/MarginContainer"]
-custom_minimum_size = Vector2(30, 90)
+[node name="main_button" parent="BoxContainerRight/MarginContainer" instance=ExtResource("5_tpsrb")]
 layout_mode = 2
-size_flags_vertical = 4
 text = ">"
 
 [node name="HotbarContainer" parent="." instance=ExtResource("6_t2xej")]

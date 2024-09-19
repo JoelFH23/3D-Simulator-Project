@@ -1,24 +1,36 @@
 extends Node
 
-var inventory_list: Array[Dictionary]
+var mutex = Mutex.new()
 var hotbar_list: Array[Dictionary]
+var inventory_list: Array[Dictionary]
 const FILE_PATH = "res://game_data.json"
 var workerThreadPool = WorkerThreadPool
 var game_data: Dictionary = {"inventory":[],"hotbar":[],"printer":[]}
+var errors_list: Array
+var printer_info_list: Array
 
-func worker(id):
+func worker(printer_id: int):
 	var i = 0
 	while i != 10:
-		print("current printer: ",game_data.printer)
-		OS.delay_msec(800)
+		if not int(game_data.printer[printer_id].quantity):
+			print("AN ERROR OCCURRED")
+			errors_list.append(printer_id)
+			break
+		game_data.printer[printer_id].quantity -= 1
+		for idx in printer_info_list.size():
+			if int(printer_info_list[idx].id) == int(printer_id):
+				print("bed_temp: ", printer_info_list[idx].bed_temp)
+				print("ext_temp: ", printer_info_list[idx].ext_temp)
+		OS.delay_msec(400)
 		i += 1
+	mutex.lock()
+	save_to_file()
+	mutex.unlock()
 
-func start_worker(id: String):
+func start_worker(id: int):
 	workerThreadPool.add_task(Callable(worker).bind(id))
 
 func _ready():
-	#var task_id = WorkerThreadPool.add_group_task(process_enemy_ai, enemies.size())
-	#print("task_id: ",task_id)
 	load_from_file()
 
 func save_to_file():

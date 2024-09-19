@@ -1,12 +1,26 @@
-[gd_scene load_steps=2 format=3 uid="uid://cefgnykhxv055"]
+[gd_scene load_steps=3 format=3 uid="uid://cefgnykhxv055"]
 
 [ext_resource type="Script" path="res://scenes/characters/slot.gd" id="1_pttaj"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_q60og"]
+bg_color = Color(0.611765, 0.611765, 0.611765, 0.121569)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color(0.2, 0.2, 0.2, 0.388235)
+border_blend = true
+corner_radius_top_left = 1
+corner_radius_top_right = 1
+corner_radius_bottom_right = 1
+corner_radius_bottom_left = 1
 
 [node name="slot" type="PanelContainer"]
 custom_minimum_size = Vector2(90, 90)
 offset_right = 90.0
 offset_bottom = 90.0
 size_flags_horizontal = 0
+theme_override_styles/panel = SubResource("StyleBoxFlat_q60og")
 script = ExtResource("1_pttaj")
 
 [node name="id_label" type="Label" parent="."]

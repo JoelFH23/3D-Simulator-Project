@@ -8,7 +8,7 @@ func _ready():
 	if not Autoload.game_data.hotbar.size():
 		for idx in hotbar.get_child_count():
 			hotbar_list.append({
-				"idx": str(idx),
+				"idx": idx,
 				"sprite": false
 			})
 		Autoload.game_data["hotbar"] = hotbar_list
@@ -19,7 +19,7 @@ func _ready():
 			var texture = Autoload.game_data.hotbar[idx].sprite
 			var quantity = Autoload.game_data.hotbar[idx].quantity
 			hotbar.get_child(idx).get_children()[1].texture = load(texture)
-			hotbar.get_child(idx).get_children()[2].text = quantity
+			hotbar.get_child(idx).get_children()[2].text = str(quantity)
 		hotbar.get_child(idx).get_children()[0].text = str(idx)
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.

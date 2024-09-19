@@ -1,0 +1,26 @@
+[gd_scene load_steps=4 format=3 uid="uid://drmmnoqe838l4"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_tjwhn"]
+bg_color = Color(0.6, 0.6, 0.6, 0.109804)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color(0.278431, 0.278431, 0.278431, 0.631373)
+corner_radius_top_left = 2
+corner_radius_top_right = 2
+corner_radius_bottom_right = 2
+corner_radius_bottom_left = 2
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_fhn1d"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_cuwfd"]
+
+[node name="Button" type="Button"]
+custom_minimum_size = Vector2(30, 90)
+offset_right = 8.0
+offset_bottom = 8.0
+size_flags_vertical = 4
+theme_override_styles/normal = SubResource("StyleBoxFlat_tjwhn")
+theme_override_styles/hover = SubResource("StyleBoxFlat_fhn1d")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_cuwfd")
