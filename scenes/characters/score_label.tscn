@@ -1,0 +1,6 @@
+[gd_scene format=3 uid="uid://p17all26atrg"]
+
+[node name="score_label" type="Label"]
+offset_right = 40.0
+offset_bottom = 23.0
+text = "0"

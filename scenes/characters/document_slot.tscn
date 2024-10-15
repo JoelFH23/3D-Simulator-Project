@@ -1,0 +1,13 @@
+[gd_scene load_steps=2 format=3 uid="uid://b0fc0w1rhn0bw"]
+
+[ext_resource type="PackedScene" uid="uid://cefgnykhxv055" path="res://scenes/characters/slot.tscn" id="1_ylb5n"]
+
+[node name="document_slot" type="Node2D"]
+
+[node name="slot" parent="." instance=ExtResource("1_ylb5n")]
+custom_minimum_size = Vector2(40, 40)
+offset_right = 92.0
+offset_bottom = 92.0
+scale = Vector2(0.8, 0.8)
+size_flags_horizontal = 4
+size_flags_vertical = 4

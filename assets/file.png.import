@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://4ii1l8pl47l3"
-path="res://.godot/imported/zelda.png-3289ac3236dae0736d9df865df044ea9.ctex"
+uid="uid://bnr5ic87vps6a"
+path="res://.godot/imported/file.png-4034073bbb85131d368f4033452a59aa.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/zelda.png"
-dest_files=["res://.godot/imported/zelda.png-3289ac3236dae0736d9df865df044ea9.ctex"]
+source_file="res://assets/file.png"
+dest_files=["res://.godot/imported/file.png-4034073bbb85131d368f4033452a59aa.ctex"]
 
 [params]
 

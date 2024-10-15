@@ -1,29 +1,20 @@
 extends CharacterBody2D
 
 @onready var window = $Window
-@onready var player = $container_button/CharacterBody2D/AnimatedSprite2D
 @onready var label = $container_button/time_label
 @onready var extrusion_temp_line = $Window/MarginContainer/VBoxContainer/HBoxContainer/extrusion_temp_line_edit
 @onready var bed_temp_line = $Window/MarginContainer/VBoxContainer/HBoxContainer2/bed_temp_line_edit
-@onready var slot = $slot
-@onready var printer_id = $slot/id_label
+@onready var filament_slot = $filament_slot
+@onready var figure_slot = $Window/MarginContainer/VBoxContainer/figure_slot
+@onready var status_label = $Window/MarginContainer/VBoxContainer/status_label
+@onready var printer_id = $printer_id_label
 
-var timer := Timer.new()
-var current_time: int = 0
-var is_running: bool = false
-signal update_label_text(text)
-const MAX_RANDOM_SEGS: int = 5
 var stylebox_flat := StyleBoxFlat.new()
 
 func _close_window():
 	window.hide()
 	
 func _open_window():
-	if player.is_playing():
-		player.stop()
-	if not timer.is_stopped():
-		print("the timer has been paused")
-		timer.paused = true
 	window.show()
 
 func _ready():
@@ -37,44 +28,27 @@ func _ready():
 	
 	bed_temp_line.add_theme_stylebox_override("normal",stylebox_flat)
 	extrusion_temp_line.add_theme_stylebox_override("normal",stylebox_flat)
-	
-	timer.one_shot = true
-	timer.timeout.connect(_reset_values)
-	add_child(timer)
 	_close_window()
-	connect("update_label_text", _on_update_label_text)
 
 func _process(_delta):
+	pass
+	"""
 	if Autoload.errors_list.size():
-		print("ERROR: ", Autoload.errors_list.find(int(printer_id.text)))
-	#if Autoload.game_data.printer[int(slot.id_label.text)].sprite:
-		#slot.quantity_label.text = str(Autoload.game_data.printer[int(slot.id_label.text)].quantity)
+		print("ERROR: ", Autoload.errors_list.find(int(filament_slot.id_label.text)))
+	
+	if Autoload.game_data.printer[int(filament_slot.id_label.text)].sprite:
+		filament_slot.quantity_label.text = str(Autoload.game_data.printer[int(filament_slot.id_label.text)].quantity)
+		
+		for printer in Autoload.game_data.printer:
+			if int(printer.idx) == int(filament_slot.id_label.text):
+				status_label.text = printer.figure.status
+	"""
 
 func _reset_values():
-	player.stop()
-	timer.stop()
 	label.text = "0"
 
 func _on_container_button_pressed():
 	_open_window()
-
-func _emit_update_label_text(text: String):
-	emit_signal("update_label_text", text)
-
-func _on_update_label_text(_text: String):
-	#label.text = str(text)
-	pass
-
-func _on_timeout():
-	var idx: int = 0
-	while idx != 25:
-		print("waiting... ", idx)
-		idx += 1
-		OS.delay_msec(250)
-		print("done!")
-	print("finished!")
-	#call_deferred("_emit_update_label_text", "0")
-	is_running = false
 
 func _on_accept_button_pressed():
 	"""
@@ -84,41 +58,45 @@ func _on_accept_button_pressed():
 		return
 	"""
 	
-	if int(slot.quantity_label.text) <= 0:
-		label.text = "FAILED!"
+	"""
+	if int(filament_slot.quantity_label.text) <= 0 or figure_slot.sprite.texture == null:
+		for idx in Autoload.game_data.printer.size():
+			if int(Autoload.game_data.printer[idx].idx) == int(filament_slot.id_label.text):
+				Autoload.game_data.printer[idx].figure.status = "FAIL"
+				Autoload.game_data.printer[idx].figure.bed_temp = 0
+				Autoload.game_data.printer[idx].figure.ext_temp = 0
 		return
-	_close_window()
+	"""
 	
+	_close_window()
+	for printer in Autoload.game_data.printer:
+		if printer.idx == int(printer_id.text):
+			printer.bed_temp = int(bed_temp_line.text)
+			printer.ext_temp = int(extrusion_temp_line.text)
+			printer.status = "running..."
+	"""
+	print("figure_slot: ", figure_slot.sprite.texture.resource_path)
 	print("Extrusion Temp: ", extrusion_temp_line.text)
 	print("Bed Temp: ", bed_temp_line.text)
-	label.text = ""
+	"""
 	
-	for idx in Autoload.printer_info_list.size():
-		if int(Autoload.printer_info_list[idx].id) == int(slot.id_label.text):
-			Autoload.printer_info_list.remove_at(idx)
+	"""
+	for idx in Autoload.game_data.printer.size():
+		if int(Autoload.game_data.printer[idx].idx) == int(filament_slot.id_label.text):
+			if Autoload.game_data.printer[idx].figure.status == "running...":
+				return
+			Autoload.game_data.printer[idx].figure.status = "running..."
+			Autoload.game_data.printer[idx].figure.bed_temp = int(bed_temp_line.text)
+			Autoload.game_data.printer[idx].figure.ext_temp = int(extrusion_temp_line.text)
+	"""
 	
-	Autoload.start_worker(int(slot.id_label.text))
-	Autoload.printer_info_list.append({
-		"id": int(slot.id_label.text),
-		"ext_temp": int(extrusion_temp_line.text),
-		"bed_temp": int(bed_temp_line.text)
-	})
+	#Autoload.start_worker(int(filament_slot.id_label.text))
 
 func _on_pause_unpause():
-	if timer.paused:
-		timer.paused = false
-		player.play("walk_animation")
 	_close_window()
-
-func _on_pause_button_pressed():
-	_on_pause_unpause()
 
 func _on_window_close_requested():
 	_on_pause_unpause()
 
 func _on_close_button_pressed():
 	_on_pause_unpause()
-
-
-func _on_texture_button_pressed() -> void:
-	print("button pressed!")

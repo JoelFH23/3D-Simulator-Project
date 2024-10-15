@@ -1,0 +1,93 @@
+[gd_scene load_steps=6 format=3 uid="uid://cer53c4pe4r0d"]
+
+[ext_resource type="Script" path="res://scenes/levels/tasks_scene.gd" id="1_ye6nb"]
+[ext_resource type="Texture2D" uid="uid://6k5gkyc8e3gq" path="res://assets/background_4.jpg" id="2_yev4h"]
+[ext_resource type="PackedScene" uid="uid://drmmnoqe838l4" path="res://scenes/characters/button.tscn" id="3_snfsw"]
+[ext_resource type="PackedScene" uid="uid://cx75r1ol8584p" path="res://scenes/characters/hotbar_container.tscn" id="4_8dfa7"]
+[ext_resource type="PackedScene" uid="uid://cefgnykhxv055" path="res://scenes/characters/slot.tscn" id="5_uesq5"]
+
+[node name="tasks_scene" type="Node2D"]
+script = ExtResource("1_ye6nb")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(576, 324)
+scale = Vector2(0.716864, 0.831836)
+texture = ExtResource("2_yev4h")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+custom_minimum_size = Vector2(0, 648)
+offset_right = 40.0
+offset_bottom = 40.0
+alignment = 1
+
+[node name="MarginContainer" type="MarginContainer" parent="VBoxContainer"]
+custom_minimum_size = Vector2(0, 648)
+layout_mode = 2
+theme_override_constants/margin_left = 20
+theme_override_constants/margin_top = 20
+theme_override_constants/margin_right = 20
+theme_override_constants/margin_bottom = 20
+
+[node name="main_scene_button" parent="VBoxContainer/MarginContainer" instance=ExtResource("3_snfsw")]
+layout_mode = 2
+text = "<"
+
+[node name="HotbarContainer" parent="." instance=ExtResource("4_8dfa7")]
+
+[node name="delete_item" parent="HotbarContainer/MarginContainer" index="0"]
+visible = false
+
+[node name="task_list_container" type="GridContainer" parent="."]
+offset_left = 348.0
+offset_top = 143.0
+offset_right = 814.0
+offset_bottom = 233.0
+columns = 5
+
+[node name="slot" parent="task_list_container" instance=ExtResource("5_uesq5")]
+layout_mode = 2
+
+[node name="slot2" parent="task_list_container" instance=ExtResource("5_uesq5")]
+layout_mode = 2
+
+[node name="slot3" parent="task_list_container" instance=ExtResource("5_uesq5")]
+layout_mode = 2
+
+[node name="slot4" parent="task_list_container" instance=ExtResource("5_uesq5")]
+layout_mode = 2
+
+[node name="slot5" parent="task_list_container" instance=ExtResource("5_uesq5")]
+layout_mode = 2
+
+[node name="slot6" parent="task_list_container" instance=ExtResource("5_uesq5")]
+layout_mode = 2
+
+[node name="slot7" parent="task_list_container" instance=ExtResource("5_uesq5")]
+layout_mode = 2
+
+[node name="slot8" parent="task_list_container" instance=ExtResource("5_uesq5")]
+layout_mode = 2
+
+[node name="slot9" parent="task_list_container" instance=ExtResource("5_uesq5")]
+layout_mode = 2
+
+[node name="slot10" parent="task_list_container" instance=ExtResource("5_uesq5")]
+layout_mode = 2
+
+[node name="task_label" type="Label" parent="."]
+offset_left = 356.0
+offset_top = 98.0
+offset_right = 404.0
+offset_bottom = 124.0
+text = "Tasks:"
+
+[node name="sell_slot" parent="." instance=ExtResource("5_uesq5")]
+offset_left = 1050.0
+offset_top = 548.0
+offset_right = 1142.0
+offset_bottom = 640.0
+
+[connection signal="pressed" from="VBoxContainer/MarginContainer/main_scene_button" to="." method="_on_main_scene_button_pressed"]
+
+[editable path="HotbarContainer"]
+[editable path="HotbarContainer/MarginContainer/delete_item"]

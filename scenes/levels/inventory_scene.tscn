@@ -1,20 +1,21 @@
-[gd_scene load_steps=7 format=3 uid="uid://bat38noapvntb"]
+[gd_scene load_steps=8 format=3 uid="uid://bat38noapvntb"]
 
-[ext_resource type="Script" path="res://scenes/levels/inventory_scene.gd" id="1_5rkne"]
-[ext_resource type="Texture2D" uid="uid://b3g32pusanrpc" path="res://assets/background_2.jpg" id="3_4b2qb"]
+[ext_resource type="Script" path="res://scenes/characters/inventory_scene.gd" id="1_5rkne"]
+[ext_resource type="Texture2D" uid="uid://6k5gkyc8e3gq" path="res://assets/background_4.jpg" id="2_o73f5"]
 [ext_resource type="PackedScene" uid="uid://cefgnykhxv055" path="res://scenes/characters/slot.tscn" id="3_xtmit"]
 [ext_resource type="PackedScene" uid="uid://drmmnoqe838l4" path="res://scenes/characters/button.tscn" id="5_tpsrb"]
-[ext_resource type="Texture2D" uid="uid://cftnda7ftkpf" path="res://assets/trash_can.png" id="5_vyn1j"]
+[ext_resource type="Texture2D" uid="uid://cftnda7ftkpf" path="res://assets/trash_can.png" id="6_6bjps"]
 [ext_resource type="PackedScene" uid="uid://cx75r1ol8584p" path="res://scenes/characters/hotbar_container.tscn" id="6_t2xej"]
+
+[sub_resource type="Theme" id="Theme_0m0fw"]
 
 [node name="Node2D" type="Node2D"]
 script = ExtResource("1_5rkne")
 
 [node name="background_image2" type="Sprite2D" parent="."]
-visible = false
-position = Vector2(576, 324.5)
-scale = Vector2(0.291531, 0.248492)
-texture = ExtResource("3_4b2qb")
+position = Vector2(576, 324)
+scale = Vector2(0.716864, 0.831836)
+texture = ExtResource("2_o73f5")
 
 [node name="inventory" type="GridContainer" parent="."]
 offset_left = 270.0
@@ -120,9 +121,6 @@ layout_mode = 2
 [node name="id_label" parent="BoxContainerLeft/delete_item" index="0"]
 text = "0"
 
-[node name="TextureRect" parent="BoxContainerLeft/delete_item" index="1"]
-texture = ExtResource("5_vyn1j")
-
 [node name="BoxContainerRight" type="VBoxContainer" parent="."]
 offset_left = 1082.0
 offset_right = 1152.0
@@ -142,6 +140,13 @@ layout_mode = 2
 text = ">"
 
 [node name="HotbarContainer" parent="." instance=ExtResource("6_t2xej")]
+
+[node name="delete_item" parent="HotbarContainer/MarginContainer" index="0"]
+texture_filter = 1
+theme = SubResource("Theme_0m0fw")
+
+[node name="sprite" parent="HotbarContainer/MarginContainer/delete_item" index="1"]
+texture = ExtResource("6_6bjps")
 
 [connection signal="focus_entered" from="inventory" to="." method="_on_inventory_focus_entered"]
 [connection signal="pressed" from="BoxContainerRight/MarginContainer/main_button" to="." method="_on_main_button_pressed"]
