@@ -1,7 +1,6 @@
-[gd_scene load_steps=12 format=3 uid="uid://b6mnghfo6suy4"]
+[gd_scene load_steps=11 format=3 uid="uid://b6mnghfo6suy4"]
 
 [ext_resource type="Script" path="res://scenes/characters/printer.gd" id="1_tlr22"]
-[ext_resource type="FontFile" uid="uid://cuquuixff1en" path="res://assets/fonts/Montserrat-Medium.ttf" id="2_5bvs5"]
 [ext_resource type="PackedScene" uid="uid://b0fc0w1rhn0bw" path="res://scenes/characters/document_slot.tscn" id="3_ibp67"]
 [ext_resource type="PackedScene" uid="uid://cefgnykhxv055" path="res://scenes/characters/slot.tscn" id="4_ddbc7"]
 
@@ -106,7 +105,6 @@ text = "Extrusion temperature"
 
 [node name="extrusion_temp_line_edit" type="LineEdit" parent="Window/MarginContainer/VBoxContainer/HBoxContainer"]
 layout_mode = 2
-theme_override_fonts/font = ExtResource("2_5bvs5")
 theme_override_styles/focus = SubResource("StyleBoxEmpty_cw2da")
 placeholder_text = "360°"
 
@@ -116,12 +114,10 @@ theme_override_constants/separation = 20
 
 [node name="bed_temp_label" type="Label" parent="Window/MarginContainer/VBoxContainer/HBoxContainer2"]
 layout_mode = 2
-theme_override_fonts/font = ExtResource("2_5bvs5")
 text = "Bed temperature"
 
 [node name="bed_temp_line_edit" type="LineEdit" parent="Window/MarginContainer/VBoxContainer/HBoxContainer2"]
 layout_mode = 2
-theme_override_fonts/font = ExtResource("2_5bvs5")
 theme_override_styles/focus = SubResource("StyleBoxEmpty_5bocx")
 placeholder_text = "360°"
 
@@ -138,16 +134,15 @@ size_flags_horizontal = 8
 
 [node name="close_button" type="Button" parent="Window/MarginContainer/VBoxContainer/HBoxContainer3"]
 layout_mode = 2
-theme_override_fonts/font = ExtResource("2_5bvs5")
 text = "Close"
 
 [node name="accept_button" type="Button" parent="Window/MarginContainer/VBoxContainer/HBoxContainer3"]
 layout_mode = 2
-theme_override_fonts/font = ExtResource("2_5bvs5")
 text = "Run"
 
 [connection signal="pressed" from="container_button" to="." method="_on_container_button_pressed"]
 [connection signal="close_requested" from="Window" to="." method="_on_window_close_requested"]
+[connection signal="visibility_changed" from="Window" to="." method="_on_window_visibility_changed"]
 [connection signal="pressed" from="Window/MarginContainer/VBoxContainer/HBoxContainer3/close_button" to="." method="_on_close_button_pressed"]
 [connection signal="pressed" from="Window/MarginContainer/VBoxContainer/HBoxContainer3/accept_button" to="." method="_on_accept_button_pressed"]
 

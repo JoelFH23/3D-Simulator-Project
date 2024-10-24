@@ -8,7 +8,7 @@ script = ExtResource("1_8hvkv")
 
 [node name="PrinterContainer" type="MarginContainer" parent="."]
 
-[node name="Printer" parent="PrinterContainer" instance=ExtResource("1_e0p4a")]
+[node name="Printer1" parent="PrinterContainer" instance=ExtResource("1_e0p4a")]
 position = Vector2(0, 78)
 scale = Vector2(1.58, 1.62)
 
@@ -28,8 +28,8 @@ scale = Vector2(1.58, 1.62)
 position = Vector2(670, 78)
 scale = Vector2(1.58, 1.62)
 
-[editable path="PrinterContainer/Printer"]
-[editable path="PrinterContainer/Printer/filament_slot"]
-[editable path="PrinterContainer/Printer/document_slot"]
-[editable path="PrinterContainer/Printer/document_slot/slot"]
-[editable path="PrinterContainer/Printer/Window/MarginContainer/VBoxContainer/figure_slot"]
+[editable path="PrinterContainer/Printer1"]
+[editable path="PrinterContainer/Printer1/filament_slot"]
+[editable path="PrinterContainer/Printer1/document_slot"]
+[editable path="PrinterContainer/Printer1/document_slot/slot"]
+[editable path="PrinterContainer/Printer1/Window/MarginContainer/VBoxContainer/figure_slot"]

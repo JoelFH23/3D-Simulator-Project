@@ -18,6 +18,10 @@ func _open_window():
 	window.show()
 
 func _ready():
+	window.exclusive = true
+	window.unresizable = true
+	window.popup_window = true
+	window.title = "Printer " + str(printer_id.text)
 	stylebox_flat.bg_color = Color(0,0,0)
 	stylebox_flat.content_margin_top = 4
 	stylebox_flat.content_margin_left = 4
@@ -31,18 +35,13 @@ func _ready():
 	_close_window()
 
 func _process(_delta):
-	pass
-	"""
-	if Autoload.errors_list.size():
-		print("ERROR: ", Autoload.errors_list.find(int(filament_slot.id_label.text)))
-	
-	if Autoload.game_data.printer[int(filament_slot.id_label.text)].sprite:
-		filament_slot.quantity_label.text = str(Autoload.game_data.printer[int(filament_slot.id_label.text)].quantity)
-		
-		for printer in Autoload.game_data.printer:
-			if int(printer.idx) == int(filament_slot.id_label.text):
-				status_label.text = printer.figure.status
-	"""
+	for printer in Autoload.game_data.printer:
+		if printer.idx == int(printer_id.text):
+			if printer.figure_slot:
+				figure_slot.get_children()[1].texture = load(printer.figure_slot.sprite)
+			if printer.filament_slot:
+				filament_slot.get_children()[2].text = str(printer.filament_slot.quantity)
+			status_label.text = printer.status
 
 func _reset_values():
 	label.text = "0"
@@ -53,50 +52,37 @@ func _on_container_button_pressed():
 func _on_accept_button_pressed():
 	"""
 	if int(extrusion_temp_line.text) <= 0 or int(bed_temp_line.text) <= 0:
-		label.text = "FAILED!"
+		current_printer.status = "FAILED!"
 		_close_window()
 		return
 	"""
+	var current_printer = Autoload.game_data.printer[int(printer_id.text)]
 	
-	"""
-	if int(filament_slot.quantity_label.text) <= 0 or figure_slot.sprite.texture == null:
-		for idx in Autoload.game_data.printer.size():
-			if int(Autoload.game_data.printer[idx].idx) == int(filament_slot.id_label.text):
-				Autoload.game_data.printer[idx].figure.status = "FAIL"
-				Autoload.game_data.printer[idx].figure.bed_temp = 0
-				Autoload.game_data.printer[idx].figure.ext_temp = 0
+	if current_printer.figure_slot:
+		current_printer.status = "FAIL"
 		return
-	"""
+	if not current_printer.file or not current_printer.filament_slot:
+		current_printer.status = "NO FILAMENT OR FILE"
+		return
+	if int(current_printer.filament_slot.quantity) <= 0:
+		current_printer.status = "NO FILAMENT"
+		return
 	
 	_close_window()
-	for printer in Autoload.game_data.printer:
-		if printer.idx == int(printer_id.text):
-			printer.bed_temp = int(bed_temp_line.text)
-			printer.ext_temp = int(extrusion_temp_line.text)
-			printer.status = "running..."
-	"""
-	print("figure_slot: ", figure_slot.sprite.texture.resource_path)
-	print("Extrusion Temp: ", extrusion_temp_line.text)
-	print("Bed Temp: ", bed_temp_line.text)
-	"""
-	
-	"""
-	for idx in Autoload.game_data.printer.size():
-		if int(Autoload.game_data.printer[idx].idx) == int(filament_slot.id_label.text):
-			if Autoload.game_data.printer[idx].figure.status == "running...":
-				return
-			Autoload.game_data.printer[idx].figure.status = "running..."
-			Autoload.game_data.printer[idx].figure.bed_temp = int(bed_temp_line.text)
-			Autoload.game_data.printer[idx].figure.ext_temp = int(extrusion_temp_line.text)
-	"""
-	
-	#Autoload.start_worker(int(filament_slot.id_label.text))
+	current_printer.status = "running..."
+	Autoload.start_worker(int(printer_id.text))
 
 func _on_pause_unpause():
 	_close_window()
 
 func _on_window_close_requested():
-	_on_pause_unpause()
+	_close_window()
 
 func _on_close_button_pressed():
 	_on_pause_unpause()
+
+func _update_window_slot():
+	pass
+
+func _on_window_visibility_changed():
+	pass

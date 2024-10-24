@@ -2,16 +2,12 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://c3fkw4in2sf87"
-path="res://.godot/imported/filament2.png-d7207e19fe262692f035e30bf028fede.ctex"
-metadata={
-"vram_texture": false
-}
+uid="uid://brc18ciaj85sc"
+valid=false
 
 [deps]
 
-source_file="res://assets/filament2.png"
-dest_files=["res://.godot/imported/filament2.png-d7207e19fe262692f035e30bf028fede.ctex"]
+source_file="res://assets/home_screen.jpg"
 
 [params]
 

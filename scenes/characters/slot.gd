@@ -26,17 +26,21 @@ func _drop_data(_pos, data) -> void:
 	var target_item_path = str(sprite.get_path()).split("/")[str(sprite.get_path()).split("/").size() - 3]
 	var target_item_path2 = str(sprite.get_path()).split("/")[str(sprite.get_path()).split("/").size() - 2]
 	
-	print("current_item_path: ", current_item_path)
-	print("target_item_path: ", target_item_path)
-	print("target_item_path2: ", target_item_path2)
-	
-	# GET COINS
+	# GET POINTS
 	if current_item_path == "hotbar" and target_item_path2 == "sell_slot":
-		if not Autoload.game_data.hotbar[current_id].figure_slot:
+		var figure_slot = Autoload.game_data.hotbar[current_id].figure_slot
+		if not figure_slot or figure_slot.status != "success":
 			print("INVALID ITEM!")
 			return
+		
+		Autoload.score += int(figure_slot.pts)
 		Autoload.game_data.hotbar[current_id].figure_slot = false
-		success = true
+		data.get_parent().get_children()[1].texture = null
+		data.get_parent().get_children()[2].text = ""
+		Autoload.game_data.user_data = {
+			"score": int(Autoload.score)
+		}
+		Autoload.save_to_file()
 	
 	###################### FILE ######################
 	if current_item_path == "hotbar" and target_item_path == "document_slot":
@@ -68,39 +72,17 @@ func _drop_data(_pos, data) -> void:
 		success = true
 	
 	###################### MessageBox (Pop-up) ######################
-	if current_item_path == "hotbar" and target_item_path == "VBoxContainer":
-		if int(Autoload.game_data.hotbar[current_id].quantity):
-			return
-		var current_priter_str = str(sprite.get_path()).split('/')[5].split("Printer")[1]
-		var current_priter_id = (1 if current_priter_str == "" else int(current_priter_str)) -1
-		if Autoload.game_data.printer[current_priter_id].figure.sprite:
-			print("slot is not empty: ",Autoload.game_data.printer[current_priter_id].figure)
-			return
-		print("current_printer: ",Autoload.game_data.printer[current_priter_id])
-		var target_slot = Autoload.game_data.hotbar.duplicate(true)[current_id]
-		Autoload.game_data.printer[current_priter_id].figure.sprite = target_slot.sprite
-		Autoload.game_data.hotbar[current_id].sprite = false
-		Autoload.game_data.hotbar[current_id].erase("quantity")
-		success = true
 	# From messageBox to hotbar
-	elif current_item_path == "VBoxContainer" and target_item_path == "hotbar":
-		var target_slot = Autoload.game_data.hotbar.duplicate(true)[target_id]
-		if target_slot.sprite:
-			print("target slot is not empty")
-			return
+	if current_item_path == "VBoxContainer" and target_item_path == "hotbar":
 		var current_priter_str = str(data.get_path()).split('/')[5].split("Printer")[1]
 		var current_priter_id = (1 if current_priter_str == "" else int(current_priter_str)) -1
-		var current_priter = Autoload.game_data.printer.duplicate(true)[current_priter_id]
-
-			#if int(item.printer_id) == int(current_priter_id):
-		#print("current_printer: ", Autoload.printer_info_list[current_priter_id])
-		Autoload.game_data.printer[current_priter_id].figure.bed_temp = 0
-		Autoload.game_data.printer[current_priter_id].figure.ext_temp = 0
-		Autoload.game_data.printer[current_priter_id].figure.sprite = false
-		Autoload.game_data.printer[current_priter_id].figure.status = "ON"
-		Autoload.game_data.hotbar[target_id].figure = current_priter.figure
-		Autoload.game_data.hotbar[target_id].sprite = current_priter.figure.sprite
-		Autoload.game_data.hotbar[target_id].quantity = 0
+		var target_slot = Autoload.game_data.hotbar.duplicate(true)[target_id]
+		if target_slot.figure_slot or target_slot.file or target_slot.filament_slot:
+			print("INVALID ITEM!")
+			return
+		Autoload.game_data.hotbar[target_id].figure_slot = Autoload.game_data.printer[current_priter_id].figure_slot
+		Autoload.game_data.printer[current_priter_id].figure_slot = false
+		Autoload.game_data.printer[current_priter_id].status = "ON"
 		success = true
 	
 	###################### PRINTER (filament) ######################
@@ -180,13 +162,15 @@ func _drop_data(_pos, data) -> void:
 			Autoload.game_data.inventory[current_id] = {
 				"idx": int(current_id), 
 				"figure_slot": false,
-				"filament_slot": false
+				"filament_slot": false,
+				"file": false
 			}
 		else:
 			Autoload.game_data.hotbar[current_id] = {
 				"idx": int(current_id), 
 				"figure_slot": false,
-				"filament_slot": false
+				"filament_slot": false,
+				"file": false
 			}
 		Autoload.save_to_file()
 	

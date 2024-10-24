@@ -1,16 +1,17 @@
 extends Node2D
 
 @onready var inventory = $inventory
-#const filament_sprite = preload("res://assets/filament4.png")
 
 const filament_sprite = [
-	preload("res://assets/filament4.png"),
-	preload("res://assets/filament.png"),
-	preload("res://assets/filament3.png")
+	preload("res://assets/filaments/filament.png"),
+	preload("res://assets/filaments/filament4.png"),
+	preload("res://assets/filaments/filament3.png")
 ]
 
+func _process(_delta):
+	pass
+
 func _ready():
-	# when the inventory is not empty draw the filaments
 	if not Autoload.game_data.inventory.is_empty():
 		for idx in Autoload.game_data.inventory.size():
 			inventory.get_child(idx).get_children()[0].text = str(idx)
@@ -26,10 +27,10 @@ func _ready():
 	var inventory_list: Array = []
 	for idx in inventory.get_child_count():
 		inventory.get_child(idx).get_children()[0].text = str(idx)
-		if idx <= 10:
-			var random_sprite: CompressedTexture2D = filament_sprite.pick_random()
+		if idx <= 14:
+			var random_sprite = load("res://assets/filaments/filament.png")
 			var rng = RandomNumberGenerator.new()
-			var random_number = rng.randi_range(10, 100)
+			var random_number = 100
 			inventory.get_child(idx).get_children()[1].texture = random_sprite
 			inventory.get_child(idx).get_children()[2].text = str(random_number)
 			inventory_list.append(
@@ -39,14 +40,16 @@ func _ready():
 						"quantity": random_number,
 						"sprite": random_sprite.resource_path,
 					},
-					"figure_slot": false
+					"figure_slot": false,
+					"file": false
 				}
 			)
 			continue
 		inventory_list.append({
 			"idx": idx,
 			"filament_slot": false,
-			"figure_slot": false
+			"figure_slot": false,
+			"file": false
 		})
 	Autoload.game_data.inventory = inventory_list
 	Autoload.save_to_file()

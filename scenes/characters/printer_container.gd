@@ -1,11 +1,10 @@
 extends Node2D
 
 @onready var container = $PrinterContainer
-@onready var figureSlot = $PrinterContainer/Printer/Window/MarginContainer/VBoxContainer/figure_slot
-@onready var document_slot = $PrinterContainer/Printer/document_slot
+@onready var figureSlot = $PrinterContainer/Printer1/Window/MarginContainer/VBoxContainer/figure_slot
+@onready var document_slot = $PrinterContainer/Printer1/document_slot
 
 func _ready():
-	#for idx in Autoload.game_data.printer.size():
 	if not Autoload.game_data.printer.size():
 		for idx in container.get_child_count():
 			Autoload.game_data.printer.append({
@@ -31,8 +30,6 @@ func _ready():
 		if Autoload.game_data.printer[idx].file:
 			var texture = Autoload.game_data.printer[idx].file.sprite
 			container.get_child(idx).get_children()[3].get_children()[0].get_children()[1].texture = load(texture)
-			print(Autoload.game_data.printer[idx].file.sprite)
-		"""
-		if Autoload.game_data.printer[idx].figure.sprite:
-			container.get_child(idx).get_children()[3].get_children()[0].get_children()[0].get_children()[2].sprite.texture = load(Autoload.game_data.printer[idx].figure.sprite)
-		"""
+		if Autoload.game_data.printer[idx].figure_slot:
+			var texture = Autoload.game_data.printer[idx].figure_slot.sprite
+			container.get_child(idx).get_children()[4].get_children()[0].get_children()[0].get_children()[2].get_children()[1].texture = load(texture)

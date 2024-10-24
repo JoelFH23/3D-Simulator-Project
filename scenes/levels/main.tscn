@@ -1,4 +1,4 @@
-[gd_scene load_steps=7 format=3 uid="uid://boruw2egswc06"]
+[gd_scene load_steps=8 format=3 uid="uid://boruw2egswc06"]
 
 [ext_resource type="Script" path="res://scenes/levels/main.gd" id="1_hs3mm"]
 [ext_resource type="Texture2D" uid="uid://6k5gkyc8e3gq" path="res://assets/background_4.jpg" id="2_0rh0q"]
@@ -6,6 +6,7 @@
 [ext_resource type="PackedScene" uid="uid://drmmnoqe838l4" path="res://scenes/characters/button.tscn" id="4_cty3t"]
 [ext_resource type="PackedScene" uid="uid://cx75r1ol8584p" path="res://scenes/characters/hotbar_container.tscn" id="5_b2vkk"]
 [ext_resource type="PackedScene" uid="uid://dvya5y746pbt5" path="res://scenes/characters/printer_container.tscn" id="5_djcek"]
+[ext_resource type="PackedScene" uid="uid://bvv6e3053ec0e" path="res://scenes/characters/top_header.tscn" id="8_aa740"]
 
 [node name="Main" type="Node2D"]
 script = ExtResource("1_hs3mm")
@@ -16,9 +17,7 @@ position = Vector2(576, 324)
 scale = Vector2(0.716864, 0.831836)
 texture = ExtResource("2_0rh0q")
 
-[node name="score_label" type="Label" parent="."]
-offset_right = 40.0
-offset_bottom = 23.0
+[node name="TopHeaderContainer" parent="." instance=ExtResource("8_aa740")]
 
 [node name="HotbarContainer" parent="." instance=ExtResource("5_b2vkk")]
 
@@ -103,8 +102,8 @@ scale = Vector2(1.07106, 0.941185)
 [editable path="HotbarContainer"]
 [editable path="HotbarContainer/MarginContainer/delete_item"]
 [editable path="printers"]
-[editable path="printers/PrinterContainer/Printer"]
-[editable path="printers/PrinterContainer/Printer/filament_slot"]
-[editable path="printers/PrinterContainer/Printer/document_slot"]
-[editable path="printers/PrinterContainer/Printer/document_slot/slot"]
-[editable path="printers/PrinterContainer/Printer/Window/MarginContainer/VBoxContainer/figure_slot"]
+[editable path="printers/PrinterContainer/Printer1"]
+[editable path="printers/PrinterContainer/Printer1/filament_slot"]
+[editable path="printers/PrinterContainer/Printer1/document_slot"]
+[editable path="printers/PrinterContainer/Printer1/document_slot/slot"]
+[editable path="printers/PrinterContainer/Printer1/Window/MarginContainer/VBoxContainer/figure_slot"]

@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://b1cs1klcprs2j"
-path="res://.godot/imported/filament.png-f16b98790b96b542b187f8ec42b5baa9.ctex"
+uid="uid://36opup7050kf"
+path="res://.godot/imported/buy_and_sell.png-39f3ca86154b3b18dc28a37bf7cdf8f9.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/filament.png"
-dest_files=["res://.godot/imported/filament.png-f16b98790b96b542b187f8ec42b5baa9.ctex"]
+source_file="res://assets/icons/buy_and_sell.png"
+dest_files=["res://.godot/imported/buy_and_sell.png-39f3ca86154b3b18dc28a37bf7cdf8f9.ctex"]
 
 [params]
 

@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://dwli0k5nuf0if"
-path="res://.godot/imported/bottle.png-c6516d24eccaf665f8dd12a5ae313f7e.ctex"
+uid="uid://crb17liyp1p0l"
+path="res://.godot/imported/filament3.png-851435e2b4bc4591eddd8055b2b3fe31.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/bottle.png"
-dest_files=["res://.godot/imported/bottle.png-c6516d24eccaf665f8dd12a5ae313f7e.ctex"]
+source_file="res://assets/filaments/filament3.png"
+dest_files=["res://.godot/imported/filament3.png-851435e2b4bc4591eddd8055b2b3fe31.ctex"]
 
 [params]
 

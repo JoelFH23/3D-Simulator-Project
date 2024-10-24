@@ -7,8 +7,17 @@ var workerThreadPool = WorkerThreadPool
 var game_data: Dictionary = {"inventory":[],"hotbar":[],"printer":[]}
 var errors_list: Array
 var printer_info_list: Array = []
+var random_figures_list: Array = []
 var score = 0
+var is_close = false
 const FILE_PATH = "res://data//game_data.json"
+const MAX_SIZE = 20
+var image_list: Array = [
+	"res://assets/figures/bottle.png",
+	"res://assets/figures/milk.png",
+	"res://assets/figures/gold_ingot.png",
+]
+var figure_error = "res://assets/figures/plasta.png"
 
 func _remove_elements():
 	for idx in game_data.printer.size():
@@ -18,56 +27,93 @@ func _remove_elements():
 		game_data.hotbar[idx].file = false
 	
 	save_to_file()
+	
+func random_figures():
+	"""create random items """
+	var id = 0
+	while true:
+		if random_figures_list.size() == MAX_SIZE:
+			OS.delay_msec(5000)
+			continue
+		var rng = RandomNumberGenerator.new()
+		random_figures_list.append({
+			"figure_id": id,
+			"sprite": image_list.pick_random(),
+			"pts": rng.randi_range(5, 30),
+			"status": "uncompleted"
+		})
+		id += 1
+		OS.delay_msec(1500)
 
 func _notification(what):
 	"""save game when app is closed"""
 	if what == NOTIFICATION_WM_CLOSE_REQUEST:
-		print("removing files...")
-		#_remove_elements()
-		print("ready...")
-		#OS.delay_msec(40)
-		#get_tree().quit()
+		get_tree().quit()
 
-func worker(printer_id: int):
-	"""
+func run_printer_task(printer_id: int):
+	var printer = game_data.printer[printer_id]
 	var block_size = 0
-	var total = 100
-	while block_size < total:
-		var rng = RandomNumberGenerator.new()
-		block_size += rng.randi_range(1, 5)
-		var percent = (block_size / total) * 100
-		print("percent: ",percent)
-		print("block_size: ", block_size)
-		OS.delay_msec(20)
-	"""
-	var i = 0
-	while i != 10:
-		if not int(game_data.printer[printer_id].quantity):
-			print("AN ERROR OCCURRED")
-			errors_list.append(printer_id)
+	var total = 50
+	var fail: bool = false
+	mutex.lock()
+	var figure_slot = random_figures_list.pop_front()
+	mutex.unlock()
+	
+	while block_size <= total:
+		var percent = (float(block_size) / total) * 100
+		printer.filament_slot.quantity -= 1
+		if printer.filament_slot.quantity <= 0:
+			fail = true
 			break
-		game_data.printer[printer_id].quantity -= 1
-		
-		for idx in game_data.printer.size():
-			if int(game_data.printer[idx].idx) == int(printer_id):
-				if game_data.printer[idx].figure.status == "FAIL":
-					return
-				game_data.printer[idx].figure.status = "running..."
-		OS.delay_msec(100)
-		i += 1
+		printer.status = str(percent) + "%"
+		block_size += 1
+		OS.delay_msec(40)
 	
 	mutex.lock()
-	for idx in game_data.printer.size():
-		if int(game_data.printer[idx].idx) == int(printer_id):
-			game_data.printer[idx].figure.status = "FINISH"
+	if fail:
+		figure_slot.sprite = figure_error
+		figure_slot.pts = 0
+		figure_slot.status = "error"
+		printer.figure_slot = figure_slot
+	else:
+		figure_slot.status = "success"
+		printer.figure_slot = figure_slot
 	save_to_file()
 	mutex.unlock()
 
+func _reset_game():
+	score = 0
+	Worker.task_list.clear()
+	
+	for hotbar in game_data.hotbar:
+		if hotbar.figure_slot:
+			hotbar.figure_slot = false
+		if hotbar.filament_slot:
+			hotbar.filament_slot = false
+		if hotbar.file:
+			hotbar.file = false
+	
+	game_data.inventory.clear()
+	
+	for printer in game_data.printer:
+		if printer.figure_slot:
+			printer.figure_slot = false
+		if printer.filament_slot:
+			printer.filament_slot = false
+		if printer.file:
+			printer.file = false
+		printer.status = "ON"
+		printer.bed_temp = 0
+		printer.ext_temp = 0
+	is_close = false
+	save_to_file()
+
 func start_worker(id: int):
-	workerThreadPool.add_task(Callable(worker).bind(id))
+	workerThreadPool.add_task(Callable(run_printer_task).bind(id))
 
 func _ready():
-	#_remove_elements()
+	var thread = Thread.new()
+	thread.start(random_figures)
 	load_from_file()
 
 func save_to_file():
@@ -95,3 +141,5 @@ func load_from_file():
 	game_data["inventory"] = json_as_dict.inventory
 	game_data["hotbar"] = json_as_dict.hotbar
 	game_data["printer"] = json_as_dict.printer
+	if json_as_dict.has("user_data"):
+		score = json_as_dict.user_data.score

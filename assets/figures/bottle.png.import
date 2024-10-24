@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://vtee8x5846me"
-path="res://.godot/imported/gold_ingot.png-86db2aced0de2e19e89911acb98fd160.ctex"
+uid="uid://cu4ynbhfkjs2t"
+path="res://.godot/imported/bottle.png-e3d7ca9417b52e5ca469f189b06e86fb.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/gold_ingot.png"
-dest_files=["res://.godot/imported/gold_ingot.png-86db2aced0de2e19e89911acb98fd160.ctex"]
+source_file="res://assets/figures/bottle.png"
+dest_files=["res://.godot/imported/bottle.png-e3d7ca9417b52e5ca469f189b06e86fb.ctex"]
 
 [params]
 

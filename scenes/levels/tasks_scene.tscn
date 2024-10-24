@@ -1,10 +1,12 @@
-[gd_scene load_steps=6 format=3 uid="uid://cer53c4pe4r0d"]
+[gd_scene load_steps=8 format=3 uid="uid://cer53c4pe4r0d"]
 
 [ext_resource type="Script" path="res://scenes/levels/tasks_scene.gd" id="1_ye6nb"]
 [ext_resource type="Texture2D" uid="uid://6k5gkyc8e3gq" path="res://assets/background_4.jpg" id="2_yev4h"]
+[ext_resource type="PackedScene" uid="uid://bvv6e3053ec0e" path="res://scenes/characters/top_header.tscn" id="3_eyuxh"]
 [ext_resource type="PackedScene" uid="uid://drmmnoqe838l4" path="res://scenes/characters/button.tscn" id="3_snfsw"]
 [ext_resource type="PackedScene" uid="uid://cx75r1ol8584p" path="res://scenes/characters/hotbar_container.tscn" id="4_8dfa7"]
 [ext_resource type="PackedScene" uid="uid://cefgnykhxv055" path="res://scenes/characters/slot.tscn" id="5_uesq5"]
+[ext_resource type="Texture2D" uid="uid://36opup7050kf" path="res://assets/icons/buy_and_sell.png" id="6_s4c4w"]
 
 [node name="tasks_scene" type="Node2D"]
 script = ExtResource("1_ye6nb")
@@ -13,6 +15,8 @@ script = ExtResource("1_ye6nb")
 position = Vector2(576, 324)
 scale = Vector2(0.716864, 0.831836)
 texture = ExtResource("2_yev4h")
+
+[node name="TopHeaderContainer" parent="." instance=ExtResource("3_eyuxh")]
 
 [node name="VBoxContainer" type="VBoxContainer" parent="."]
 custom_minimum_size = Vector2(0, 648)
@@ -87,7 +91,12 @@ offset_top = 548.0
 offset_right = 1142.0
 offset_bottom = 640.0
 
+[node name="sprite" parent="sell_slot" index="1"]
+texture = ExtResource("6_s4c4w")
+stretch_mode = 4
+
 [connection signal="pressed" from="VBoxContainer/MarginContainer/main_scene_button" to="." method="_on_main_scene_button_pressed"]
 
 [editable path="HotbarContainer"]
 [editable path="HotbarContainer/MarginContainer/delete_item"]
+[editable path="sell_slot"]

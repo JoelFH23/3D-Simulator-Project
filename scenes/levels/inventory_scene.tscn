@@ -1,7 +1,8 @@
-[gd_scene load_steps=8 format=3 uid="uid://bat38noapvntb"]
+[gd_scene load_steps=9 format=3 uid="uid://bat38noapvntb"]
 
-[ext_resource type="Script" path="res://scenes/characters/inventory_scene.gd" id="1_5rkne"]
+[ext_resource type="Script" path="res://scenes/levels/inventory_scene.gd" id="1_5rkne"]
 [ext_resource type="Texture2D" uid="uid://6k5gkyc8e3gq" path="res://assets/background_4.jpg" id="2_o73f5"]
+[ext_resource type="PackedScene" uid="uid://bvv6e3053ec0e" path="res://scenes/characters/top_header.tscn" id="3_tqrac"]
 [ext_resource type="PackedScene" uid="uid://cefgnykhxv055" path="res://scenes/characters/slot.tscn" id="3_xtmit"]
 [ext_resource type="PackedScene" uid="uid://drmmnoqe838l4" path="res://scenes/characters/button.tscn" id="5_tpsrb"]
 [ext_resource type="Texture2D" uid="uid://cftnda7ftkpf" path="res://assets/trash_can.png" id="6_6bjps"]
@@ -16,6 +17,8 @@ script = ExtResource("1_5rkne")
 position = Vector2(576, 324)
 scale = Vector2(0.716864, 0.831836)
 texture = ExtResource("2_o73f5")
+
+[node name="TopHeaderContainer" parent="." instance=ExtResource("3_tqrac")]
 
 [node name="inventory" type="GridContainer" parent="."]
 offset_left = 270.0

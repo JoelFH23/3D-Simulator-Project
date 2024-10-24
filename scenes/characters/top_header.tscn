@@ -1,0 +1,20 @@
+[gd_scene load_steps=3 format=3 uid="uid://bvv6e3053ec0e"]
+
+[ext_resource type="PackedScene" uid="uid://db8k1nwet0so3" path="res://scenes/characters/main_menu_button.tscn" id="1_isefj"]
+[ext_resource type="Script" path="res://scenes/characters/top_header.gd" id="1_kbo3c"]
+
+[node name="TopHeaderContainer" type="MarginContainer"]
+offset_right = 1152.0
+offset_bottom = 63.0
+theme_override_constants/margin_left = 20
+theme_override_constants/margin_right = 20
+script = ExtResource("1_kbo3c")
+
+[node name="ScoreLabel" type="Label" parent="."]
+layout_mode = 2
+text = "SCORE: 0"
+
+[node name="MainButton" parent="." instance=ExtResource("1_isefj")]
+layout_mode = 2
+size_flags_horizontal = 8
+size_flags_vertical = 4

@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://dwm5edbhptps1"
-path="res://.godot/imported/filament4.png-16e9d62b358d74097c3d5478ce8a78c2.ctex"
+uid="uid://c8cn0phcc7qk5"
+path="res://.godot/imported/filament.png-3194c50aa421179f74e99e5fc78dd8d5.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/filament4.png"
-dest_files=["res://.godot/imported/filament4.png-16e9d62b358d74097c3d5478ce8a78c2.ctex"]
+source_file="res://assets/filaments/filament.png"
+dest_files=["res://.godot/imported/filament.png-3194c50aa421179f74e99e5fc78dd8d5.ctex"]
 
 [params]
 

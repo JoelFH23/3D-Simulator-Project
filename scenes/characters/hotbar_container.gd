@@ -25,6 +25,9 @@ func _ready():
 		elif Autoload.game_data.hotbar[idx].file:
 			var texture = Autoload.game_data.hotbar[idx].file.sprite
 			hotbar.get_child(idx).get_children()[1].texture = load(texture)
+		elif Autoload.game_data.hotbar[idx].figure_slot:
+			var texture = Autoload.game_data.hotbar[idx].figure_slot.sprite
+			hotbar.get_child(idx).get_children()[1].texture = load(texture)
 		hotbar.get_child(idx).get_children()[0].text = str(idx)
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.

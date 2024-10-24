@@ -1,0 +1,32 @@
+[gd_scene load_steps=6 format=3 uid="uid://db8k1nwet0so3"]
+
+[ext_resource type="Script" path="res://scenes/characters/main_menu_button.gd" id="1_s4t8v"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_w3pj5"]
+bg_color = Color(0.102827, 0.721622, 0.830419, 0.203922)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_dvis6"]
+bg_color = Color(0.101961, 0.721569, 0.831373, 0.203922)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_kvcg7"]
+bg_color = Color(0.101961, 0.721569, 0.831373, 0.203922)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_w6sim"]
+content_margin_left = 4.0
+content_margin_top = 4.0
+content_margin_right = 4.0
+content_margin_bottom = 4.0
+bg_color = Color(0.0862745, 0.670588, 0.772549, 0.203922)
+border_color = Color(0.0862745, 0.670588, 0.772549, 0.203922)
+
+[node name="MainButton" type="Button"]
+offset_right = 8.0
+offset_bottom = 8.0
+theme_override_styles/hover = SubResource("StyleBoxFlat_w3pj5")
+theme_override_styles/pressed_mirrored = SubResource("StyleBoxFlat_dvis6")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_kvcg7")
+theme_override_styles/normal = SubResource("StyleBoxFlat_w6sim")
+text = "Main Menu"
+script = ExtResource("1_s4t8v")
+
+[connection signal="pressed" from="." to="." method="_on_main_menu_pressed"]
